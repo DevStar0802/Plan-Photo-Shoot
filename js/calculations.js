@@ -15,20 +15,31 @@ submit.addEventListener("click", function (e) {
     flight(airport.value);
     equip();
     logEquip();
+    finalLog();
 })
 
-// Equipment Phrase
+//Final Log
+function finalLog() {
+    if (fly == "") {
+        console.log(equipment)
+    } else {
+        console.log(`${equipment} For the drone shots, you should expect a ${flightRes}.`)
+    }
+}
+
+
+// Log Equipment
 function logEquip() {
     if (fly == "" && virt == "") {
-        console.log(`You need to take ${numPhotos} photos and bring your Camera and Tripod.`)
+        equipment = `You need to take ${numPhotos} photos and bring your Camera and Tripod.`
     } else if (fly == "" && virt !== "") {
-        console.log(`You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${virt}.`)
+        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${virt}.`
 
     } else if (fly !== "" && virt !== "") {
-        console.log(`You need to take ${numPhotos} photos and bring your Camera, Tripod, ${fly}, and ${virt}.`)
+        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, ${fly}, and ${virt}.`
     }
     else if (fly !== "" && virt == "") {
-        console.log(`You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${fly}.`)
+        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${fly}.`
     }
 }
 

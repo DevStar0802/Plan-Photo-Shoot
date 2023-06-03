@@ -1,0 +1,8 @@
+1. Create the JS functions for number of photos, equipment needed, and drone restrictions
+2. Create the new page area to populate with the results of the functions. Begin by having it say pending... before running a photo search
+3. Connect the Google Maps Api to the results
+4. Perfect the styling of the page
+5. Make page responsive
+6. Launch app
+
+Create JS function for # of photos:

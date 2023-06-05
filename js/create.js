@@ -56,12 +56,9 @@ function finalLog() {
     if (fly == "") {
 
         display = equipment;
-        console.log(equipment)
     } else {
 
         display = `${equipment} For the drone shots, you should expect a ${flightRes}.`
-        console.log(`${equipment} For the drone shots, you should expect a ${flightRes}.`)
-        // console.log(`${equipment} For the drone shots, you should expect a ${flightRes}.`)
     }
 }
 
@@ -197,7 +194,6 @@ function showMain() {
 function deleteList() {
     let liArray = document.querySelectorAll('#packing-list li')
     liArray.forEach(li => {
-        console.log(li)
         li.remove()
     })
 }

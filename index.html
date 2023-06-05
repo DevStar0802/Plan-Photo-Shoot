@@ -29,7 +29,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#page-top">Plan Your Next Photo Shoot</a>
+            <a class="navbar-brand" href="#page-top">Photography </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -59,21 +59,17 @@
                     <img src="assets/img/fog1.png" style="--i: 10;" />
                     <img src="assets/img/fog2.png" style="--i: 9;" />
                     <img src="assets/img/fog3.png" style="--i: 8;" />
-                    <!-- <img src="assets/img/fog4.png" style="--i: 7;" /> -->
-                    <!-- <img src="assets/img/fog5.png" style="--i: 6;" /> -->
                 </div>
             </div>
         </div>
-        <!-- <div class="bg"> -->
 
-        <!-- </div> -->
     </header>
     <!-- Photo form-->
     <section class="about-section  pb-5" id="photo-form">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8">
-                    <form id="photo-form">
+                    <form id="form">
                         <div class="mb-3">
                             <label for="address" class="form-label">Enter Property Address</label>
                             <input type="text" class="form-control" id="address">
@@ -112,36 +108,49 @@
             <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
                 <div class="col-xl-8 col-lg-8 mx-auto" id="map">
                 </div>
-                <div class="row">
-                    <div class="col-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <h2 class="mb-4">Your Preparation </h2>
-                            <div class="card">
-                                <h5 class="card-header fw-bold">Number of Photos</h5>
-                                <div class="card-body">
-                                    <p id="num-photos">parse</p>
-                                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                    <div class=" text-lg-left">
+                        <h2 class="mb-4">Your Preparation </h2>
+                        <div class="card">
+                            <h5 class="card-header fw-bold">Number of Photos</h5>
+                            <div class="card-body">
+                                <p id="num-photos"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-8 mx-auto mt-4">
-                        <div id="list mt-4 text-lg-left">
-                            <div class="card">
-                                <h5 class="card-header fw-bold">Packing List</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title ">Bring the following...</h5>
-                                    <ul id="packing-list">
-                                    </ul>
-                                </div>
+            </div>
+            <div class="row" id="drone-card" style="display: none;">
+                <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                    <div class=" text-lg-left">
+                        <div class="card">
+                            <h5 class="card-header fw-bold">Flight Restrictions</h5>
+                            <div class="card-body">
+                                <p id="flight-restrictions"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                    <div id="list mt-4 text-lg-left">
+                        <div class="card">
+                            <h5 class="card-header fw-bold">Packing List</h5>
+                            <div class="card-body">
+                                <h5 class="card-title ">Bring the following...</h5>
+                                <ul id="packing-list">
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-8 mx-auto text-center mt-4">
+        </div>
+        <div class="col-sm-12 col-lg-8 mx-auto text-center mt-4">
             <a href="#photo-form" class="btn btn-warning text-center mx-auto" id="new-search">New Search</a>
         </div>
         </div>
@@ -150,7 +159,7 @@
 
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
-        <div class="container px-4 px-lg-5">Copyright &copy; Your Website 2023</div>
+        <div class="container px-4 px-lg-5">Arizona Drone Photography</div>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

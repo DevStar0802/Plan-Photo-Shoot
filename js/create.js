@@ -22,6 +22,8 @@ let newSearch2 = document.getElementById('newSearch')
 let results = document.getElementById('results')
 let photos = document.getElementById('num-photos')
 let pList = document.getElementById('packing-list')
+let retrictions = document.getElementById('flight-restrictions')
+let droneCard = document.getElementById('drone-card')
 
 let camList = [
     "Camera",
@@ -174,6 +176,9 @@ function createList() {
             listItem.setAttribute('class', 'card-text')
             pList.appendChild(listItem)
         })
+        retrictions.innerHTML = `For the drone shots, you should expect a ${flightRes}.`
+
+        droneCard.setAttribute('style', 'display: block;')
     }
 
     if (virt) {
@@ -190,6 +195,7 @@ function showMain() {
     photoForm.setAttribute('style', 'display: block;')
     masthead.setAttribute('style', 'display: block;')
     results.setAttribute('style', 'display: none;')
+    droneCard.setAttribute('style', 'display: none;')
 }
 
 function deleteList() {

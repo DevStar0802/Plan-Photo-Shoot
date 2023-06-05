@@ -18,10 +18,10 @@ let content = document.getElementById('content')
 let photoForm = document.getElementById('photo-form')
 let masthead = document.getElementById('masthead')
 let newSearch = document.getElementById('new-search')
+let newSearch2 = document.getElementById('newSearch')
 let results = document.getElementById('results')
 let photos = document.getElementById('num-photos')
 let pList = document.getElementById('packing-list')
-let printList = document.getAnimations('print')
 
 let camList = [
     "Camera",
@@ -211,40 +211,12 @@ newSearch.addEventListener("click", function () {
     showMain();
     window.scrollTo(0, 0)
 })
-
-printList.addEventListener("click", function () {
-    // window.print()
+newSearch2.addEventListener("click", function () {
+    deleteList();
+    showMain();
+    window.scrollTo(0, 0)
 })
 
 
 
 
-
-// let list = document.createElement("li")
-// document.getElementById("display-scores").appendChild(list)
-// list.setAttribute("id", "list" + [i])
-// list.textContent = highScores[i].Initials + " - " + highScores[i].Score
-
-// Show Results Page
-// function create() {
-//     let content = document.getElementById('content')
-//     let photoForm = document.getElementById('photo-form')
-//     let masthead = document.getElementById('masthead')
-//     photoForm.setAttribute('style', 'display: none;')
-//     masthead.setAttribute('style', 'display: none;')
-//     content.innerHTML = display
-
-//     //create div
-//     let newDiv = document.createElement('div')
-//     newDiv.setAttribute('class', 'col-8 mx-auto text-center mt-4')
-
-//     //create button
-//     let newSearch = document.createElement('button')
-//     newSearch.setAttribute('class', 'btn btn-primary text-center mx-auto')
-//     newSearch.innerHTML = 'new search'
-
-//     //append elements
-//     let resultsContain = document.getElementById('results-cont')
-//     resultsContain.appendChild(newDiv)
-//     newDiv.appendChild(newSearch)
-// }

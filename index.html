@@ -20,6 +20,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/mystyles.css" rel="stylesheet" />
+    <link href="css/smoke.css" rel="stylesheet" />
 
 
 </head>
@@ -37,9 +38,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#photo-form">New Search</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#photo-form" id="newSearch">New Search</a></li>
+
                 </ul>
             </div>
         </div>
@@ -47,14 +47,26 @@
     <!-- Landing Page-->
     <header class="masthead" id="masthead">
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-            <div class="d-flex justify-content-center">
-                <div class="text-center">
-                    <h1 class="mx-auto my-0 text-uppercase">Plan Your Next Photo Shoot</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Enter your photo shoot details below...</h2>
-                    <a class="btn btn-primary" href="#photo-form">Get Started</a>
+            <div class="bg">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Plan Your Next Photo Shoot</h1>
+                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Enter your photo shoot details below...</h2>
+                        <a class="btn btn-primary" href="#photo-form">Get Started</a>
+                    </div>
+                </div>
+                <div class="fog">
+                    <img src="assets/img/fog1.png" style="--i: 10;" />
+                    <img src="assets/img/fog2.png" style="--i: 9;" />
+                    <img src="assets/img/fog3.png" style="--i: 8;" />
+                    <!-- <img src="assets/img/fog4.png" style="--i: 7;" /> -->
+                    <!-- <img src="assets/img/fog5.png" style="--i: 6;" /> -->
                 </div>
             </div>
         </div>
+        <!-- <div class="bg"> -->
+
+        <!-- </div> -->
     </header>
     <!-- Photo form-->
     <section class="about-section  pb-5" id="photo-form">
@@ -99,18 +111,14 @@
         <div class="container px-4 px-lg-5" id="results-cont">
             <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
                 <div class="col-xl-8 col-lg-8 mx-auto" id="map">
-
-                    <!-- <img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." id="" /> -->
                 </div>
                 <div class="row">
                     <div class="col-8 mx-auto mt-4">
                         <div class=" text-lg-left">
                             <h2 class="mb-4">Your Preparation </h2>
-                            <!-- <p class="text-black-50 mb-0" id="content">Content</p> -->
                             <div class="card">
                                 <h5 class="card-header fw-bold">Number of Photos</h5>
                                 <div class="card-body">
-                                    <!-- <h5 class="card-title ">Number of Photos</h5> -->
                                     <p id="num-photos">parse</p>
                                 </div>
                             </div>
@@ -126,7 +134,6 @@
                                     <h5 class="card-title ">Bring the following...</h5>
                                     <ul id="packing-list">
                                     </ul>
-                                    <!-- <a id="print" class="btn btn-primary">Print List</a> -->
                                 </div>
                             </div>
                         </div>
@@ -135,7 +142,7 @@
             </div>
         </div>
         <div class="col-8 mx-auto text-center mt-4">
-            <button class="btn btn-primary text-center mx-auto" id="new-search">New Search</button>
+            <a href="#photo-form" class="btn btn-primary text-center mx-auto" id="new-search">New Search</a>
         </div>
         </div>
         </div>

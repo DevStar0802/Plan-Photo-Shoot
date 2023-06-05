@@ -1,19 +1,9 @@
-let sqft = document.getElementById('sqft')
-let airport = document.getElementById('airport')
-let submit = document.getElementById('btn-submit')
-let drone = document.getElementById('drone')
-let hdr = document.getElementById('hdr')
-let tour = document.getElementById('tour')
-let pTag = document.getElementById('display')
 let numPhotos = 0
 let flightRes = ""
 let equipment = ""
-let camera = ""
-let fly = ""
-let virt = ""
-let display = ""
-
-//for event listeners
+let camera = false
+let fly = false
+let virt = false
 let content = document.getElementById('content')
 let photoFormSection = document.getElementById('photo-form')
 let photoForm = document.getElementById('p-form')
@@ -26,6 +16,13 @@ let pList = document.getElementById('packing-list')
 let retrictions = document.getElementById('flight-restrictions')
 let droneCard = document.getElementById('drone-card')
 let photoCard = document.getElementById('photo-card')
+let sqft = document.getElementById('sqft')
+let airport = document.getElementById('airport')
+let submit = document.getElementById('btn-submit')
+let drone = document.getElementById('drone')
+let hdr = document.getElementById('hdr')
+let tour = document.getElementById('tour')
+let pTag = document.getElementById('display')
 
 let camList = [
     "Camera",
@@ -46,62 +43,23 @@ let tourList = [
     "360 Tripod",
 ]
 
-const init = (e) => {
-    e.preventDefault()
-    sqftCalc(sqft.value);
-    flight(airport.value);
-    equip();
-    logEquip();
-    finalLog();;
-}
 
-
-//Final Log
-function finalLog() {
-    if (fly == "") {
-
-        display = equipment;
-    } else {
-
-        display = `${equipment} For the drone shots, you should expect a ${flightRes}.`
-    }
-}
-
-
-// Log Equipment
-function logEquip() {
-    if (fly == "" && virt == "") {
-        equipment = `You need to take ${numPhotos} photos and bring your Camera and Tripod.`
-    } else if (fly == "" && virt !== "") {
-        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${virt}.`
-
-    } else if (fly !== "" && virt !== "") {
-        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, ${fly}, and ${virt}.`
-    }
-    else if (fly !== "" && virt == "") {
-        equipment = `You need to take ${numPhotos} photos and bring your Camera, Tripod, and ${fly}.`
-    }
-}
 
 // Equipment Calculation
 function equip() {
     if (hdr.checked === true) {
-        camera = camList
+        camera = true
     }
     else {
-        camera = ""
     }
     if (drone.checked === true) {
-        fly = droneList
+        fly = true
     }
     else {
-        fly = ""
     }
-
     if (tour.checked == true) {
-        virt = tourList
+        virt = true
     } else {
-        virt = ""
     }
     return (virt)
 }
@@ -124,14 +82,14 @@ function sqftCalc(footage) {
             numPhotos = 60
         }
         else {
-            numPhotos = 100
+            numPhotos = "Consult with Client"
         }
     } else {
         numPhotos = ""
     }
 
 }
-// Airport Calculation
+// Airspace Calculation
 function flight(a) {
     if (a < 1) {
         flightRes = "No Fly Zone"
@@ -163,7 +121,7 @@ function showResults() {
 
 }
 
-//loop over equipment to make packing list
+//loop over equipment to make packing list and show appropiate drone card
 function createList() {
     if (camera) {
         camList.forEach(cam => {
@@ -173,7 +131,11 @@ function createList() {
             pList.appendChild(listItem)
         });
         photoCard.setAttribute('style', 'display: block;')
-        photos.innerHTML = `You need to take ${numPhotos} photos.`
+        if (isNaN(numPhotos)) {
+            photos.innerHTML = numPhotos
+        } else {
+            photos.innerHTML = `You need to take ${numPhotos} photos.`
+        }
     }
 
     if (fly) {
@@ -184,7 +146,6 @@ function createList() {
             pList.appendChild(listItem)
         })
         retrictions.innerHTML = `For the drone shots, you should expect a ${flightRes}.`
-
         droneCard.setAttribute('style', 'display: block;')
     }
 
@@ -198,6 +159,7 @@ function createList() {
     }
 }
 
+//show the landing page and form again
 function showMain() {
     photoFormSection.setAttribute('style', 'display: block;')
     masthead.setAttribute('style', 'display: block;')
@@ -206,11 +168,19 @@ function showMain() {
     photoCard.setAttribute('style', 'display: none;')
 }
 
+//reset the packing list by deleting li's
 function deleteList() {
     let liArray = document.querySelectorAll('#packing-list li')
     liArray.forEach(li => {
         li.remove()
     })
+}
+
+const init = (e) => {
+    e.preventDefault()
+    sqftCalc(sqft.value);
+    flight(airport.value);
+    equip();
 }
 
 photoForm.addEventListener("submit", async function (e) {
@@ -220,14 +190,17 @@ photoForm.addEventListener("submit", async function (e) {
     window.scrollTo(0, 0)
 })
 
+//event listeners for buttons to return to landing page and make new submission
 newSearch.addEventListener("click", function () {
     deleteList();
     showMain();
+    location.reload()
     window.scrollTo(0, 0)
 })
 newSearch2.addEventListener("click", function () {
     deleteList();
     showMain();
+    location.reload()
     window.scrollTo(0, 0)
 })
 

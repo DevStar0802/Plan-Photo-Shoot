@@ -5,4 +5,4 @@
 5. Make page responsive
 6. Launch app
 
-Create JS function for # of photos:
+Basically either utilize Sequelize or scrap handlebars and Express to just use JavScript

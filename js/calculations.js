@@ -3,27 +3,35 @@ let airport = document.getElementById('airport')
 let submit = document.getElementById('btn-submit')
 let drone = document.getElementById('drone')
 let tour = document.getElementById('tour')
+let pTag = document.getElementById('display')
 let numPhotos = 0
 let flightRes = ""
 let equipment = ""
 let fly = ""
 let virt = ""
+let display = ""
 
-submit.addEventListener("click", function (e) {
+const init = (e) => {
     e.preventDefault()
     sqftCalc(sqft.value);
     flight(airport.value);
     equip();
     logEquip();
-    finalLog();
-})
+    finalLog();;
+}
+
 
 //Final Log
 function finalLog() {
     if (fly == "") {
+
+        display = equipment;
         console.log(equipment)
     } else {
+
+        display = `${equipment} For the drone shots, you should expect a ${flightRes}.`
         console.log(`${equipment} For the drone shots, you should expect a ${flightRes}.`)
+        // console.log(`${equipment} For the drone shots, you should expect a ${flightRes}.`)
     }
 }
 
@@ -97,3 +105,13 @@ function flight(a) {
         flightRes = "400ft cieling, no restrictions"
     }
 }
+
+
+submit.addEventListener("click", async function (e) {
+    init(e);
+    document.location.replace('/post');
+    // pTag.innerHTML = display
+
+    console.log(response)
+
+})

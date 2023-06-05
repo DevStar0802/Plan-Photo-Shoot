@@ -156,8 +156,10 @@ function showResults() {
     results.setAttribute('style', 'display: block;')
     // content.innerHTML = display
     photos.innerHTML = `You need to take ${numPhotos} photos.`
+}
 
-    //loop over equipment to make packing list
+//loop over equipment to make packing list
+function createList() {
     if (camera) {
         camList.forEach(cam => {
             let listItem = document.createElement("li")
@@ -184,20 +186,32 @@ function showResults() {
             pList.appendChild(listItem)
         })
     }
-
-    window.scrollTo(0, 0)
 }
 
+function showMain() {
+    photoForm.setAttribute('style', 'display: block;')
+    masthead.setAttribute('style', 'display: block;')
+    results.setAttribute('style', 'display: none;')
+}
+
+function deleteList() {
+    let liArray = document.querySelectorAll('#packing-list li')
+    liArray.forEach(li => {
+        console.log(li)
+        li.remove()
+    })
+}
 
 submit.addEventListener("click", async function (e) {
     init(e);
     showResults();
+    createList();
+    window.scrollTo(0, 0)
 })
 
 newSearch.addEventListener("click", function () {
-    photoForm.setAttribute('style', 'display: block;')
-    masthead.setAttribute('style', 'display: block;')
-    results.setAttribute('style', 'display: none;')
+    deleteList();
+    showMain();
     window.scrollTo(0, 0)
 })
 

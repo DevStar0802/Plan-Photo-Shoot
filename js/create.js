@@ -21,6 +21,7 @@ let newSearch = document.getElementById('new-search')
 let results = document.getElementById('results')
 let photos = document.getElementById('num-photos')
 let pList = document.getElementById('packing-list')
+let printList = document.getAnimations('print')
 
 let camList = [
     "Camera",
@@ -209,6 +210,10 @@ newSearch.addEventListener("click", function () {
     deleteList();
     showMain();
     window.scrollTo(0, 0)
+})
+
+printList.addEventListener("click", function () {
+    // window.print()
 })
 
 

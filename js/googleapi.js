@@ -2,9 +2,9 @@ let map;
 
 let myLatLng = { lat: -34.397, lng: 150.644 }
 let address1 = document.getElementById('address')
-let search = document.getElementById('submit')
+let search = document.getElementById('btn-submit')
 
-async function initMap() {
+window.initMap = async function () {
 
     map = await new google.maps.Map(document.getElementById("map"), {
         center: myLatLng,

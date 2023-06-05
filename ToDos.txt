@@ -1,8 +1,0 @@
-
-2. Incorporate Express and HandleBars.js to dynamically change page contents
-3. Connect the Google Maps Api to the results
-4. Perfect the styling of the page
-5. Make page responsive
-6. Launch app
-
-Basically either utilize Sequelize or scrap handlebars and Express to just use JavScript

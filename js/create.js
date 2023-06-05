@@ -15,7 +15,8 @@ let display = ""
 
 //for event listeners
 let content = document.getElementById('content')
-let photoForm = document.getElementById('photo-form')
+let photoFormSection = document.getElementById('photo-form')
+let photoForm = document.getElementById('p-form')
 let masthead = document.getElementById('masthead')
 let newSearch = document.getElementById('new-search')
 let newSearch2 = document.getElementById('newSearch')
@@ -24,6 +25,7 @@ let photos = document.getElementById('num-photos')
 let pList = document.getElementById('packing-list')
 let retrictions = document.getElementById('flight-restrictions')
 let droneCard = document.getElementById('drone-card')
+let photoCard = document.getElementById('photo-card')
 
 let camList = [
     "Camera",
@@ -151,11 +153,14 @@ function flight(a) {
 
 // Show Results Page 
 function showResults() {
-    photoForm.setAttribute('style', 'display: none;')
+    if (!camera && !fly && !virt) {
+        alert('Please Select Atleast One: Photos, Drone, or Virtual Tour')
+        return;
+    }
+    photoFormSection.setAttribute('style', 'display: none;')
     masthead.setAttribute('style', 'display: none;')
     results.setAttribute('style', 'display: block;')
-    // content.innerHTML = display
-    photos.innerHTML = `You need to take ${numPhotos} photos.`
+
 }
 
 //loop over equipment to make packing list
@@ -167,6 +172,8 @@ function createList() {
             listItem.setAttribute('class', 'card-text')
             pList.appendChild(listItem)
         });
+        photoCard.setAttribute('style', 'display: block;')
+        photos.innerHTML = `You need to take ${numPhotos} photos.`
     }
 
     if (fly) {
@@ -192,10 +199,11 @@ function createList() {
 }
 
 function showMain() {
-    photoForm.setAttribute('style', 'display: block;')
+    photoFormSection.setAttribute('style', 'display: block;')
     masthead.setAttribute('style', 'display: block;')
     results.setAttribute('style', 'display: none;')
     droneCard.setAttribute('style', 'display: none;')
+    photoCard.setAttribute('style', 'display: none;')
 }
 
 function deleteList() {
@@ -205,7 +213,7 @@ function deleteList() {
     })
 }
 
-submit.addEventListener("click", async function (e) {
+photoForm.addEventListener("submit", async function (e) {
     init(e);
     showResults();
     createList();

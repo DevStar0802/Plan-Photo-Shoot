@@ -29,13 +29,13 @@ https://youtu.be/PYxM34EG7dI
 
 
 ## Screenshots
- ![Photo Plan Screenshot 1](assets/img/photo%20(1).png)       
+ ![Photo Plan Screenshot 1](public/assets/img/photo%20(1).png)       
                
- ![Photo Plan Screenshot 2](assets/img/photo%20(2).png)           
+ ![Photo Plan Screenshot 2](public/assets/img/photo%20(2).png)           
                  
- ![Photo Plan Screenshot 3](assets/img/photo%20(3).png)               
+ ![Photo Plan Screenshot 3](public/assets/img/photo%20(3).png)               
                       
- ![Photo Plan Screenshot 4](assets/img/photo%20(4).png)                       
+ ![Photo Plan Screenshot 4](public/assets/img/photo%20(4).png)                       
        
 
 

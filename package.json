@@ -1,0 +1,18 @@
+{
+  "name": "plan-photo-shoot",
+  "version": "1.0.0",
+  "description": "A web app that assists a photographer in planning for a photoshoot using Google Maps API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brent-Bew-Canon/Plan-Photo-Shoot"
+  },
+  "author": "Brent-Bew-Canon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brent-Bew-Canon/Plan-Photo-Shoot/issues"
+  }
+}

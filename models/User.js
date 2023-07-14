@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create user model
-const studentSchema = new Schema(
+const userSchema = new Schema(
     {
         firstName: {
             type: String,
@@ -22,6 +22,7 @@ const studentSchema = new Schema(
         password: { //TODO: apply appropriate validators for password
             type: String,
             required: true,
+            min_length: 8,
             max_length: 50,
         }
     },
@@ -32,6 +33,10 @@ const studentSchema = new Schema(
     }
 );
 
-const User = model('user', studentSchema);
+userSchema.pre('save', async function () {
+    await hashPassword();
+});
+
+const User = model('user', userSchema);
 
 module.exports = User;

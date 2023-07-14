@@ -6,6 +6,7 @@ const jobSchema = new Schema(
         jobName: {
             type: String,
             required: true,
+            unique: true
         },
         custName: {
             type: String,
@@ -23,10 +24,6 @@ const jobSchema = new Schema(
             type: Number,
             required: false,
         },
-        nickName: {
-            type: String,
-            required: false,
-        },
         drone: {
             type: Boolean,
             required: true,
@@ -38,7 +35,11 @@ const jobSchema = new Schema(
         tour: {
             type: Boolean,
             required: true
-        }
+        },
+        date: {
+            type: Date,
+            default: Date.now,
+        },
     }
 )
 

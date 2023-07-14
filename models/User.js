@@ -34,16 +34,36 @@ const userSchema = new Schema(
     }
 );
 
-function hashPassword(pass) {
-    // hash password
-    pass = bcrypt.hash(pass, 10)
-    return pass
+//schema pre function to hash passwords before saving to db
+userSchema.pre('save', function (next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // hash the password using our salt
+    bcrypt.hash(user.password, 10, function (err, hash) {
+        if (err) return next(err);
+
+        // override the cleartext password with the hashed one
+        user.password = hash;
+        next();
+    });
+});
+
+//schema method to validate passwords upon login
+// userSchema.methods.comparePassword = function (candidatePassword, cb) {
+//     bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+//         if (err) return cb(err);
+//         cb(null, isMatch);
+//     });
+// };
+
+userSchema.methods.comparePassword = function (passInput) {
+    return bcrypt.compareSync(passInput, this.password);
 }
 
-userSchema.pre('save', async function () {
-    this.password = await hashPassword(this.password)
-});
 
 const User = model('user', userSchema);
 
-module.exports = { User };
+module.exports = { User, userSchema };

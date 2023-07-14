@@ -4,7 +4,8 @@ const {
     getOneUser,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    addJob
 } = require('../../controllers/userController.js');
 
 // /api/user
@@ -16,5 +17,10 @@ router
     .get(getOneUser)
     .put(updateUser)
     .delete(deleteUser);
+
+// /api/user/:email
+router
+    .route('/:email')
+    .put(addJob)
 
 module.exports = router;

@@ -1,5 +1,7 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaType } = require('mongoose');
 const bcrypt = require('bcrypt')
+const { Job } = require('./Job')
+
 
 // Schema to create user model
 const userSchema = new Schema(
@@ -25,7 +27,13 @@ const userSchema = new Schema(
             required: true,
             min_length: 8,
             max_length: 50,
-        }
+        },
+        jobs: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'job'
+            }
+        ]
     },
     { //TODO: check if this is necessary to add
         toJSON: {

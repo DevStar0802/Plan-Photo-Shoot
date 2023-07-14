@@ -40,6 +40,29 @@ const jobSchema = new Schema(
             type: Date,
             default: Date.now,
         },
+        paid: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
+        shareLink: {
+            type: String,
+            required: false
+        },
+        //Values from legacy app creation      
+        fRestrictions: {
+            type: String,
+            required: false,
+            default: "none"
+        },
+        numPhotos: {
+            type: Number,
+            required: false
+        },
+        packList: {
+            type: String,
+            required: false
+        },
     }
 )
 

@@ -11,6 +11,18 @@ module.exports = {
         }
     },
 
+
+    // Get profile page
+    async getProfile(req, res) {
+        try {
+            console.log(__dirname)
+            res.sendFile(__dirname + 'profile.html', {
+            });
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
     // log in a user
     async login(req, res) {
         try {
@@ -36,5 +48,6 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
-    }
+    },
+
 }

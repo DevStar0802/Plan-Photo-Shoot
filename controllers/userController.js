@@ -73,7 +73,7 @@ module.exports = {
     async addJob(req, res) {
         try {
             const user = await User.findOneAndUpdate(
-                { email: req.parameters.email },
+                { email: req.params.email },
                 { $addToSet: { jobs: req.body } },
                 { runValidators: true, new: true }
             );
@@ -87,6 +87,7 @@ module.exports = {
             res.json(user);
         } catch (error) {
             res.status(500).json(error)
+            console.log(error)
         }
     }
 

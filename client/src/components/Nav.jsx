@@ -2,17 +2,24 @@ import '../App.css'
 
 function Nav({ handlePageChange }) {
     return (
-        <nav className="navbar dark-b">
-            <div className="container-fluid">
-                <a className="py-2 ps-3 white-text fs-2" href="#Main" onClick={() => handlePageChange('Main')}>Brent Buchanan</a>
-                <div className="d-flex pe-3" role="search">
-                    <a href="#AboutMe" onClick={() => handlePageChange('CreateJob')} className='mx-3 fs-5 green-text navi-link'>Create Job</a>
-                    <a href="#Portfolio" onClick={() => handlePageChange('MyJobs')} className="mx-3 fs-5 green-text navi-link" >My Jobs</a>
-                    <a href="#Contact" onClick={() => handlePageChange('Login')} className="mx-3 fs-5 green-text navi-link" >Login/Name</a>
+        <nav className="navbar navbar-expand-lg navbar-light text-primary" id="mainNav">
+            <div className="container px-4 px-lg-5">
+                <a className="navbar-brand text-dark" href="#page-top">Photography </a>
+                <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    Menu
+                    <i className="fas fa-bars"></i>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarResponsive">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item"><a className="nav-link text-dark" href="#photo-form" id="newSearch">New Search</a></li>
+                        <li className="nav-item"><a className="nav-link text-dark" href="#photo-form" id="newSearch">My Jobs</a></li>
+                        <li className="nav-item"><a className="nav-link text-dark" href="#photo-form" id="newSearch">Login\Profile</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
-
     )
 }
 

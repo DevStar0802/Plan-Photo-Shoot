@@ -1,0 +1,26 @@
+{
+  "name": "plan-photo-shoot-test",
+  "private": true,
+  "version": "0.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "vite",
+    "watch": "nodemon",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "vite": "^4.4.0"
+  }
+}

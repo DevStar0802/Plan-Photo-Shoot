@@ -17,6 +17,6 @@ app.use(routes);
 
 db.once('open', () => {
     app.listen(port, () => {
-        console.log(`Server Live, app running on port ${port}!`);
+        console.log(`Server Live, running on port ${port}!`);
     });
 });

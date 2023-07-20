@@ -9,8 +9,22 @@ function MyJobs() {
                         <div class=" text-lg-left">
                             <h1 class="mb-4 text-center">My Jobs</h1>
                         </div>
-                        <div className="col">
-                            <p>Date Some Job</p>
+                        <div className="col-4 mb-4">
+                            <a href="" className='btn btn-warning text-white fw-bold p-3'>Sort</a>
+                        </div>
+                        <div className="col-4 border-bottom mb-3">
+                            <p>1/1/2023</p>
+                            <Link to="/job-page">
+                                <p className='fs-5 fw-bold'>Some Job</p>
+                            </Link>
+                        </div>
+                        <div className="col-4 border-bottom mb-3">
+                            <p>1/1/2023</p>
+                            <p className='fs-5 fw-bold'>Some Job</p>
+                        </div>
+                        <div className="col-4 border-bottom mb-3">
+                            <p>1/1/2023</p>
+                            <p className='fs-5 fw-bold'>Some Job</p>
                         </div>
                     </div>
                 </div>

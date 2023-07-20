@@ -30,6 +30,10 @@ function CreateJob() {
                                     <input type="number" class="form-control" id="airport" min="0" />
                                 </div>
                                 <div class="mb-3">
+                                    <label for="price" class="form-label text-dark">$ Price</label>
+                                    <input type="number" class="form-control" id="price" min="0" />
+                                </div>
+                                <div class="mb-3">
                                     <label for="notes" class="form-label text-dark">Notes</label>
                                     <input type="number" class="form-control" id="notes" min="0" />
                                 </div>

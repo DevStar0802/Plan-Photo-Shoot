@@ -55,7 +55,7 @@ function MainPage({ handlePageChange, data }) {
                             <div className="text-center">
                                 <h1 className="mx-auto my-0 text-uppercase">Plan Your Next Photo Shoot</h1>
                                 <h2 className="text-white-50 mx-auto mt-2 mb-5">Enter your photo shoot details below...</h2>
-                                <p>{data.firstName}</p>
+                                <p>{data.jobName}</p>
                                 <a className="btn btn-warning" href="#photo-form">Get Started</a>
                             </div>
                         </div>

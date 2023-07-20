@@ -31,7 +31,7 @@ function App() {
           setBackendData(data);
         }
       ).then(
-        console.log(backendData.map)
+        console.log(backendData)
       )
   }, [])
 
@@ -41,7 +41,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<MainPage />} />
+          element={<MainPage data={backendData[0]} />} />
         <Route
           path="/profile"
           element={<Profile />} />

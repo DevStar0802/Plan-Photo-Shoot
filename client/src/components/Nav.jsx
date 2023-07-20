@@ -5,8 +5,8 @@ function Nav({ handlePageChange }) {
     return (
         <nav className="navbar navbar-expand-lg navbar-light text-primary" id="mainNav">
             <div className="container px-4 px-lg-5">
-                <Link to="/" className='text-decoration-none'>
-                    <a className="navbar-brand text-dark" href="#page-top">Photography </a>
+                <Link to="/" className='text-decoration-none navbar-brand text-dark' href="#page-top">
+                    Photography
                 </Link>
                 <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -16,16 +16,9 @@ function Nav({ handlePageChange }) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ms-auto">
-                        <Link className='text-decoration-none' to="/create-job">
-                            <li className="nav-item"><a className="nav-link text-dark" href="#photo-form" id="newSearch">Create Job</a></li>
-                        </Link>
-                        <Link className='text-decoration-none' to="/my-jobs">
-                            <li className="nav-item"><a className="nav-link text-dark" href="#photo-form" id="newSearch">My Jobs</a></li>
-                        </Link>
-                        <Link to="/profile" className='text-decoration-none'>
-                            <li className="nav-item"><a className="nav-link text-dark" href="" id="newSearch">Login\Profile</a></li>
-                        </Link>
-
+                        <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/create-job" href="#photo-form" id="newSearch">Create Job</Link></li>
+                        <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/my-jobs" href="#photo-form" id="newSearch">My Jobs</Link></li>
+                        <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/profile" href="" id="newSearch">Login\Profile</Link></li>
                     </ul>
                 </div>
             </div>

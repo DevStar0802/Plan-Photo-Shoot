@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as bootstrap from 'bootstrap'
 import './App.css'
 import './styles.css'
 import './smoke.css'
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
 
-    fetch("/api/user")
+    fetch("/api/job")
       .then(
         response => response.json()
       )
@@ -31,7 +32,7 @@ function App() {
           setBackendData(data);
         }
       ).then(
-        console.log(backendData.map)
+        console.log(backendData)
       )
   }, [])
 
@@ -41,7 +42,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<MainPage />} />
+          element={<MainPage data={backendData[0]} />} />
         <Route
           path="/profile"
           element={<Profile />} />

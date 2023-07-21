@@ -25,7 +25,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ logInUser }}>
+      value={{ logInUser, users }}>
       {/* We render children in our component so that any descendent can access the value from the provider */}
       {children}
     </UserContext.Provider>

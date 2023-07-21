@@ -5,8 +5,13 @@ const {
     createUser,
     deleteUser,
     updateUser,
-    addJob
+    addJob,
+    login
 } = require('../../controllers/userController.js');
+
+
+// '/login'
+router.route('/login').post(login)
 
 // /api/user
 router.route('/').get(getUsers).post(createUser);

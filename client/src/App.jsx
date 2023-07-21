@@ -13,6 +13,7 @@ import Profile from './pages/Profile'
 import CreateJob from './pages/CreateJob'
 import MyJobs from './pages/MyJobs'
 import JobPage from './pages/JobPage'
+import Login from './pages/Login'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -55,6 +56,9 @@ function App() {
         <Route
           path="/job-page"
           element={<JobPage />} />
+        <Route
+          path="/login"
+          element={<Login />} />
       </Routes>
       <Footer />
     </Router>

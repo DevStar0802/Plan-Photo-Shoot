@@ -18,7 +18,7 @@ function Nav({ handlePageChange }) {
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/create-job" href="#photo-form" id="newSearch">Create Job</Link></li>
                         <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/my-jobs" href="#photo-form" id="newSearch">My Jobs</Link></li>
-                        <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/profile" href="" id="newSearch">Login\Profile</Link></li>
+                        <li className="nav-item"><Link className="nav-link text-dark text-decoration-none" to="/login" href="" id="newSearch">Login\Profile</Link></li>
                     </ul>
                 </div>
             </div>

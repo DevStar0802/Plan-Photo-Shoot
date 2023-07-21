@@ -1,6 +1,43 @@
 const { User } = require('../models')
 
 module.exports = {
+    // log in a user
+    async login(req, res) {
+        try {
+            const userData = await User.findOne({ email: req.body.email })
+            if (!userData) {
+                res
+                    .status(400)
+                    .json({ message: 'Incorrect email, please try again' });
+                return;
+            }
+
+            const validPassword = await userData.comparePassword(req.body.password);
+
+            if (!validPassword) {
+                res
+                    .status(400)
+                    .json({ message: `Incorrect password, please try again ${req.body.password}` });
+                return;
+            }
+
+            // req.session.user = {
+            //     uuid: '12234-2345-2323423'
+            // }
+            req.session.logged_in = true;
+
+            req.session.save(() => {
+
+
+                res.json({ user: userData, message: 'You are now logged in!' })
+            });
+
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
+
     // Get all users
     async getUsers(req, res) {
         try {

@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
-app.use(routes);
+
 
 //initialize session with secret, cookie, and store location
 const sess = {
@@ -29,6 +29,8 @@ const sess = {
 
 //Use express session middleware
 app.use(session(sess));
+
+app.use(routes);
 
 db.once('open', () => {
     app.listen(port, () => {

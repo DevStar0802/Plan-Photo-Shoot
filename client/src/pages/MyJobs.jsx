@@ -12,11 +12,11 @@ function MyJobs() {
                         <div className="col-4 mb-4">
                             <a href="" className='btn btn-warning text-white fw-bold p-3'>Sort</a>
                         </div>
-                        <div className="col-4 border-bottom mb-3">
+                        <div className="col-12 border-bottom mb-3">
                             <p>1/1/2023</p>
-                            <Link to="/job-page">
-                                <p className='fs-5 fw-bold'>Some Job</p>
-                            </Link>
+
+                            <p className='fs-5 fw-bold'>1/1/2023 -   $1300.00 <Link to="/job-page">Some Job</Link>  </p>
+
                         </div>
                         <div className="col-4 border-bottom mb-3">
                             <p>1/1/2023</p>

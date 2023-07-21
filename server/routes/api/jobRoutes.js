@@ -13,7 +13,7 @@ router.route('/').get(getJobs).post(createJob);
 // /api/job/focus
 router
     .route('/focus')
-    .get(getOneJob)
+    .post(getOneJob)
     .put(updateJob)
     .delete(deleteJob);
 

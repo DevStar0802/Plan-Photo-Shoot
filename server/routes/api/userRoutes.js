@@ -19,7 +19,7 @@ router.route('/').get(getUsers).post(createUser);
 // /api/user/focus
 router
     .route('/focus')
-    .get(getOneUser)
+    .post(getOneUser)
     .put(updateUser)
     .delete(deleteUser);
 

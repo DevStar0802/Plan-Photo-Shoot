@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 const sess = {
     secret: 'User Login Session',
     cookie: {
-        maxAge: 300000,
+        maxAge: 7200000,
         httpOnly: true,
         secure: false,
         sameSite: 'strict',

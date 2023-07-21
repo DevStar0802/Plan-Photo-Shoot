@@ -18,11 +18,6 @@ import { UserProvider } from './utils/UserContext';
 
 function App() {
 
-  useEffect(() => {
-
-
-  }, [])
-
   return (
     <Router>
       <UserProvider>

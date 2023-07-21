@@ -49,6 +49,10 @@ const jobSchema = new Schema(
             type: String,
             required: false
         },
+        price: {
+            type: Number,
+            required: true
+        },
         //Values from legacy app creation      
         fRestrictions: {
             type: String,

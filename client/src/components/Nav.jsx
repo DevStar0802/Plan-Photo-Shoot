@@ -10,7 +10,9 @@ function Nav({ handlePageChange }) {
     useEffect(() => {
         const currSession = JSON.parse(localStorage.getItem('session'));
         const currUser = JSON.parse(localStorage.getItem('user'));
-
+        if (!currSession) {
+            return
+        }
         // Convert timestamp in milliseconds to a Date object
         const timeStamp = Date.now();
         const currTime = new Date(timeStamp);

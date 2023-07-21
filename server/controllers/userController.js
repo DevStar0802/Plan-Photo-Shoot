@@ -21,15 +21,9 @@ module.exports = {
                 return;
             }
 
-            // req.session.user = {
-            //     uuid: '12234-2345-2323423'
-            // }
             req.session.logged_in = true;
-
             req.session.save(() => {
-
-
-                res.json({ user: userData, message: 'You are now logged in!' })
+                res.json({ user: userData, message: 'Logged in!' })
             });
 
         } catch (error) {

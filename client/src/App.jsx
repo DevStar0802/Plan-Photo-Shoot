@@ -14,10 +14,9 @@ import CreateJob from './pages/CreateJob'
 import MyJobs from './pages/MyJobs'
 import JobPage from './pages/JobPage'
 import Login from './pages/Login'
+import { UserProvider } from './utils/UserContext';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const [backendData, setBackendData] = useState([{}])
 
 
@@ -39,28 +38,30 @@ function App() {
 
   return (
     <Router>
-      <Nav />
-      <Routes>
-        <Route
-          path="/"
-          element={<MainPage data={backendData[0]} />} />
-        <Route
-          path="/profile"
-          element={<Profile />} />
-        <Route
-          path="/create-job"
-          element={<CreateJob />} />
-        <Route
-          path="/my-jobs"
-          element={<MyJobs />} />
-        <Route
-          path="/job-page"
-          element={<JobPage />} />
-        <Route
-          path="/login"
-          element={<Login />} />
-      </Routes>
-      <Footer />
+      <UserProvider>
+        <Nav />
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage data={backendData[0]} />} />
+          <Route
+            path="/profile"
+            element={<Profile />} />
+          <Route
+            path="/create-job"
+            element={<CreateJob />} />
+          <Route
+            path="/my-jobs"
+            element={<MyJobs />} />
+          <Route
+            path="/job-page"
+            element={<JobPage />} />
+          <Route
+            path="/login"
+            element={<Login />} />
+        </Routes>
+        <Footer />
+      </UserProvider>
     </Router>
   )
 }

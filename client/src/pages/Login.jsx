@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import { useFormik } from 'formik';
+import { useUserContext } from '../utils/UserContext';
 
 
 function Login() {
 
+    const navigate = useNavigate();
     // const [email, setEmail] = useState()
     // const [pass, setPass] = useState()
 
@@ -16,6 +18,8 @@ function Login() {
     //     setEmail(e.target.value)
     // }
 
+    const { logInUser } = useUserContext();
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -23,7 +27,6 @@ function Login() {
         },
         onSubmit: async values => {
             try {
-                console.log(JSON.stringify(values))
                 const response = await fetch("/api/user/login", {
                     method: "POST",
                     headers: {
@@ -33,8 +36,11 @@ function Login() {
                 })
 
                 const result = await response.json()
-
-                console.log(result)
+                console.log(result.message)
+                if (result.message === 'Logged in!') {
+                    logInUser(result.user)
+                    navigate("/profile")
+                }
             } catch (error) {
                 console.log(error)
             }

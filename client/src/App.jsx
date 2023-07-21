@@ -17,23 +17,10 @@ import Login from './pages/Login'
 import { UserProvider } from './utils/UserContext';
 
 function App() {
-  const [backendData, setBackendData] = useState([{}])
-
-
 
   useEffect(() => {
 
-    fetch("/api/job")
-      .then(
-        response => response.json()
-      )
-      .then(
-        data => {
-          setBackendData(data);
-        }
-      ).then(
-        console.log(backendData)
-      )
+
   }, [])
 
   return (
@@ -43,7 +30,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainPage data={backendData[0]} />} />
+            element={<MainPage />} />
           <Route
             path="/profile"
             element={<Profile />} />

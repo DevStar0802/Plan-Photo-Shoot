@@ -22,10 +22,10 @@ module.exports = {
             }
 
             req.session.logged_in = true;
+            the_session = req.session
             req.session.save(() => {
-                res.json({ user: userData, message: 'Logged in!' })
+                res.json({ user: userData, the_session, message: 'Logged in!' })
             });
-
         } catch (error) {
             console.error(error)
         }

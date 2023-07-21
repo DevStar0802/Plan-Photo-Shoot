@@ -15,12 +15,9 @@ export const UserProvider = ({ children }) => {
 
   // Function to add a student
   const logInUser = (user) => {
-    console.log('the current users: ', users)
     const login = true;
     const loggedInUser = { ...user, login };
-    console.log(loggedInUser)
-    setUser({ logged_in: login, email: loggedInUser.email });
-    console.log('the new users: ', users)
+    setUser({ logged_in: true, email: loggedInUser.email });
   };
 
   return (

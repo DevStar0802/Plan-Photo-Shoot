@@ -7,17 +7,6 @@ import { useUserContext } from '../utils/UserContext';
 function Login() {
 
     const navigate = useNavigate();
-    // const [email, setEmail] = useState()
-    // const [pass, setPass] = useState()
-
-    // function setPassword(e) {
-    //     setPass(e.target.value)
-    // }
-
-    // function setMail(e) {
-    //     setEmail(e.target.value)
-    // }
-
     const { logInUser } = useUserContext();
 
     const formik = useFormik({
@@ -39,6 +28,8 @@ function Login() {
                 console.log(result.message)
                 if (result.message === 'Logged in!') {
                     logInUser(result.user)
+                    localStorage.setItem('session', JSON.stringify(result.the_session))
+                    localStorage.setItem('user', JSON.stringify(result.user))
                     navigate("/profile")
                 }
             } catch (error) {

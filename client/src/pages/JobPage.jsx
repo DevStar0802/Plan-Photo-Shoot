@@ -4,10 +4,11 @@ import { useUserContext } from '../utils/UserContext';
 
 //TODO use location state to pull off jobnae parameter
 function JobPage() {
-    const [jobs, setJobs] = useState()
+    const [jobs, setJobs] = useState({})
+    //pull off the jobname from the location as state.jobber
     let { state } = useLocation();
     const urlJob = state.jobber;
-    console.log(urlJob)
+    console.log('This is the state pulled off the location and passed into the fetch request: ', urlJob)
 
 
     useEffect(() => {
@@ -26,11 +27,12 @@ function JobPage() {
                 }),
             })
             const jobData = await response.json()
-            console.log(jobData)
+            console.log('This is Job Data', jobData)
             if (jobData.length === 0) {
-                jobData = 'No Data!'
+                console.log('No data from source for this jog')
             } else {
                 setJobs(jobData)
+                console.log('this is jobs now:', jobs)
             }
         } catch (error) {
             console.log(error)
@@ -44,7 +46,7 @@ function JobPage() {
                 <div className="row">
                     <div className="col-sm-10 col-lg-6 mx-auto mt-4">
                         <div className=" text-lg-left">
-                            <h1 className="mb-4 text-center">jobs</h1>
+                            <h1 className="mb-4 text-center">{jobs.jobName || "jobs"}</h1>
                             <div className="card mb-4" id="">
                                 <div className="card-body">
                                     <p id=""><a href="" className="btn"> {jobs.date} </a></p>
@@ -81,6 +83,8 @@ function JobPage() {
             </div>
         </section>
     )
+
+
 }
 
 export default JobPage

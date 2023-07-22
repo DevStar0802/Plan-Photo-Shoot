@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useUserContext } from '../utils/UserContext';
+import { changeDate } from '../utils/Date'
 
 //TODO use location state to pull off jobnae parameter
 function JobPage() {
@@ -26,11 +27,12 @@ function JobPage() {
                     jobName: name
                 }),
             })
-            const jobData = await response.json()
+            let jobData = await response.json()
             console.log('This is Job Data', jobData)
             if (jobData.length === 0) {
                 console.log('No data from source for this jog')
             } else {
+                jobData.date = changeDate(jobData.date)
                 setJobs(jobData)
                 console.log('this is jobs now:', jobs)
             }

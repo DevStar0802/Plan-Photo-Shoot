@@ -1,6 +1,48 @@
+import { useFormik } from 'formik';
 
 
 function CreateJob() {
+
+
+    const formik = useFormik({
+        initialValues: {
+            jobName: '',
+            custName: '',
+            address: '',
+            sqFt: null,
+            milesFromAir: null,
+            price: null,
+            notes: '',
+            photos: false,
+            drone: false,
+            tour: false
+        },
+        onSubmit: async values => {
+            try {
+                const response = await fetch("/api/job", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(values)
+                })
+
+                const result = await response.json()
+                console.log(result.message)
+                if (result.message === 'Logged in!') {
+                    logInUser(result.user)
+                    localStorage.setItem('session', JSON.stringify(result.the_session))
+                    localStorage.setItem('user', JSON.stringify(result.user))
+                    navigate("/profile")
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+        },
+    });
+
+
     return (
         <section class="projects-section bg-light" id="results">
             <div class="container px-4 px-lg-5" id="results-cont">

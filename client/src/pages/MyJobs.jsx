@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useUserContext } from '../utils/UserContext';
 
@@ -47,7 +47,7 @@ function MyJobs() {
         return jobs.map(job =>
             <div>
                 <div className="col-12 border-bottom mb-3">
-                    <p className='fs-5 fw-bold'>{job.address} ----- <Link to={{ pathname: "/job-page", state: job.jobName }}>{job.jobName}</Link>  ----- {job.price}</p>
+                    <p className='fs-5 fw-bold'>{job.address} ----- <Link to={"/job-page"} state={{ jobber: job.jobName }}>{job.jobName}</Link>  ----- {job.price}</p>
                 </div>
             </div>)
     }

@@ -20,7 +20,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No job with that name!' });
             }
 
-            res.json(job);
+            res.json({ job: job, message: 'Success' });
         } catch (err) {
             res.status(500).json(err);
         }

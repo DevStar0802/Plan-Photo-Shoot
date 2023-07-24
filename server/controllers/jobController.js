@@ -31,8 +31,7 @@ module.exports = {
             const job = await Job.create(req.body);
             res.json(job);
         } catch (err) {
-            console.log(err);
-            return res.status(500).json(err);
+            return res.status(500).json('Error creating job:', err);
         }
     },
     // Delete a job

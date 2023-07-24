@@ -31,6 +31,17 @@ module.exports = {
         }
     },
 
+    // log out a user
+    async logout(req, res) {
+        // Clear the user's session data from MongoDB 
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ error: 'Logout failed' });
+            }
+            return res.status(200).json({ message: 'Logged out successfully' });
+        });
+    },
+
 
     // Get all users
     async getUsers(req, res) {
@@ -53,7 +64,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No user with that email!' });
             }
 
-            res.json(user);
+            res.json({ user: user, message: 'Success' });
         } catch (err) {
             res.status(500).json(err);
             console.log(err)
@@ -115,7 +126,7 @@ module.exports = {
                     .json({ message: 'No user found with that email ' });
             }
 
-            res.json(user);
+            res.json({ user: user, message: "Success" });
         } catch (error) {
             res.status(500).json(error)
             console.log(error)

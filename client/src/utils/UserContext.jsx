@@ -13,16 +13,23 @@ export const UserProvider = ({ children }) => {
     email: ''
   });
 
-  // Function to add a student
+  // Function to login the user
   const logInUser = (user) => {
     const login = true;
     const loggedInUser = { ...user, login };
-    setUser({ logged_in: true, email: loggedInUser.email });
+    setUser({ logged_in: true, email: loggedInUser });
+  };
+
+  // Function to logout the user
+  const logOutUser = (user) => {
+    const login = false;
+    const loggedInUser = { ...user, login };
+    setUser({ logged_in: false, email: null });
   };
 
   return (
     <UserContext.Provider
-      value={{ logInUser, users }}>
+      value={{ logInUser, logOutUser, users }}>
       {/* We render children in our component so that any descendent can access the value from the provider */}
       {children}
     </UserContext.Provider>

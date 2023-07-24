@@ -53,6 +53,10 @@ const jobSchema = new Schema(
             type: Number,
             required: true
         },
+        notes: {
+            type: String,
+            required: false
+        },
         //Values from legacy app creation      
         fRestrictions: {
             type: String,

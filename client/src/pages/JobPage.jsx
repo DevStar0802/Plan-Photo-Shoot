@@ -1,9 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { useUserContext } from '../utils/UserContext';
 import { changeDate } from '../utils/Date'
 
-//TODO use location state to pull off jobnae parameter
 function JobPage() {
     const [jobs, setJobs] = useState({})
     //pull off the jobname from the location as state.jobber
@@ -32,9 +30,10 @@ function JobPage() {
             if (jobData.length === 0) {
                 console.log('No data from source for this jog')
             } else {
-                jobData.date = changeDate(jobData.date)
-                setJobs(jobData)
-                console.log('this is jobs now:', jobs)
+                console.log('this is jobsData.date: ', jobData.job.date)
+                jobData.job.date = changeDate(jobData.job.date)
+                setJobs(jobData.job)
+                console.log('this is jobs after time change:', jobs)
             }
         } catch (error) {
             console.log(error)

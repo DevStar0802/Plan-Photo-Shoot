@@ -1,13 +1,20 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { useUserContext } from '../utils/UserContext';
 
 
 function Login() {
-
     const navigate = useNavigate();
-    const { logInUser } = useUserContext();
+    const { logOutUser, logInUser } = useUserContext();
+
+    useEffect(() => {
+        const currSession = JSON.parse(localStorage.getItem('session'));
+        const currUser = JSON.parse(localStorage.getItem('user'));
+        if (!currSession) {
+            return logOutUser('')
+        }
+    }, []);
 
     const formik = useFormik({
         initialValues: {
@@ -29,8 +36,8 @@ function Login() {
                 if (result.message === 'Logged in!') {
                     logInUser(result.user)
                     localStorage.setItem('session', JSON.stringify(result.the_session))
-                    localStorage.setItem('user', JSON.stringify(result.user))
-                    navigate("/profile")
+                    localStorage.setItem('user', JSON.stringify(result.user.email))
+                    navigate("/profile", { state: { user: result.user.email } })
                 }
             } catch (error) {
                 console.log(error)
@@ -69,7 +76,6 @@ function Login() {
                                             value={formik.values.password}
                                         />
                                     </div>
-                                    {/* <input type="text" placeholder='What is your password?' onChange={setPassword(e)} /> */}
                                     <button type='submit'>Login</button>
                                 </form>
                             </div>

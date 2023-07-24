@@ -1,6 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { useUserContext } from '../utils/UserContext';
 import { changeDate } from '../utils/Date'
 
 //TODO use location state to pull off jobnae parameter

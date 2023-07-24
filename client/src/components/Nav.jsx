@@ -4,14 +4,14 @@ import { useUserContext } from '../utils/UserContext';
 import { useEffect } from 'react'
 
 function Nav({ handlePageChange }) {
-    const { users, logInUser } = useUserContext();
+    const { users, logInUser, logOutUser } = useUserContext();
 
     //upon load, check if user is logged in
     useEffect(() => {
         const currSession = JSON.parse(localStorage.getItem('session'));
         const currUser = JSON.parse(localStorage.getItem('user'));
         if (!currSession) {
-            return
+            return logOutUser('')
         }
         // Convert timestamp in milliseconds to a Date object
         const timeStamp = Date.now();

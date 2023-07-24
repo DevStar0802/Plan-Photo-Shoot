@@ -64,7 +64,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No user with that email!' });
             }
 
-            res.json(user);
+            res.json({ user: user, message: 'Success' });
         } catch (err) {
             res.status(500).json(err);
             console.log(err)

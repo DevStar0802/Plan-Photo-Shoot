@@ -1,14 +1,10 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { useUserContext } from '../utils/UserContext';
 
 function MyJobs() {
 
     const [jobs, setJobs] = useState([])
-
-    const { users } = useUserContext();
-    const userData = JSON.parse(localStorage.getItem('user'))
-    const userEmail = userData.email
+    const userEmail = JSON.parse(localStorage.getItem('user'))
     let allJobs = ''
 
     useEffect(() => {
@@ -29,12 +25,10 @@ function MyJobs() {
             })
             const result = await response.json()
             console.log(result)
-            if (result.jobs.length === 0) {
-                allJobs = 'No Jobs Yet!'
-            } else {
-                allJobs = result.jobs
-                setJobs(allJobs)
-            }
+
+            allJobs = result.user.jobs
+            setJobs(allJobs)
+
         } catch (error) {
             console.log(error)
         }
@@ -62,6 +56,11 @@ function MyJobs() {
                             <a href="" className='btn btn-warning text-white fw-bold p-3'>Sort</a>
                         </div>
                         {displayJobs()}
+                    </div>
+                    <div>
+                        <div className="col-12 border-bottom mb-3">
+                            <Link to={"/create-job"} className='btn btn-warning'>Create Job</Link>
+                        </div>
                     </div>
                 </div>
             </div>

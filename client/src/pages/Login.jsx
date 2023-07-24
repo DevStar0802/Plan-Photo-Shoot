@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { useUserContext } from '../utils/UserContext';
 
@@ -36,8 +36,8 @@ function Login() {
                 if (result.message === 'Logged in!') {
                     logInUser(result.user)
                     localStorage.setItem('session', JSON.stringify(result.the_session))
-                    localStorage.setItem('user', JSON.stringify(result.user))
-                    navigate("/profile")
+                    localStorage.setItem('user', JSON.stringify(result.user.email))
+                    navigate("/profile", { state: { user: result.user.email } })
                 }
             } catch (error) {
                 console.log(error)
@@ -76,7 +76,6 @@ function Login() {
                                             value={formik.values.password}
                                         />
                                     </div>
-                                    {/* <input type="text" placeholder='What is your password?' onChange={setPassword(e)} /> */}
                                     <button type='submit'>Login</button>
                                 </form>
                             </div>

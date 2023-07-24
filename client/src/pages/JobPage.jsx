@@ -2,7 +2,6 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { changeDate } from '../utils/Date'
 
-//TODO use location state to pull off jobnae parameter
 function JobPage() {
     const [jobs, setJobs] = useState({})
     //pull off the jobname from the location as state.jobber

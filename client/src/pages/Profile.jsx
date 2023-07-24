@@ -1,7 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logoutFunction } from '../utils/Logout'
-import React from 'react'
-import { useUserContext } from '../utils/UserContext';
+import React, { useState, useEffect } from 'react'
 
 function checkName(user) {
     return user ? user : ""
@@ -13,10 +12,38 @@ function checkUsername(user) {
 
 
 function Profile() {
-    const { users, logInUser } = useUserContext();
+    const [user, setUser] = useState('')
     const navigate = useNavigate();
-    const userData = JSON.parse(localStorage.getItem('user'))
-    const userName = userData.firstName
+
+    useEffect(() => {
+        const userEmail = JSON.parse(localStorage.getItem('user'));
+        // const userEmail = 'benji@gmail.com'
+        fetchUserData(userEmail);
+    }, []);
+
+    async function fetchUserData(email) {
+        try {
+            const response = await fetch("/api/user/focus", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email
+                }),
+            })
+            const result = await response.json()
+            console.log('Here is the result from finding user: ', result);
+            if (result.message === "Success") {
+                setUser(result.user)
+            }
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     const handleLogout = async () => {
         const redirectURL = await logoutFunction();
@@ -31,11 +58,11 @@ function Profile() {
                 <div className="row">
                     <div className="col-sm-10 col-lg-6 mx-auto mt-4">
                         <div className=" text-lg-left">
-                            <h1 className="mb-4 text-center">Hi, {checkName(userName)}</h1>
+                            <h1 className="mb-4 text-center">Hi, {user.firstName}</h1>
                             <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Email</h5>
                                 <div className="card-body">
-                                    <p id="">{checkUsername(userData.email)}</p>
+                                    <p id="">{user.email}</p>
                                 </div>
                             </div>
                             <div className="card mb-4" id="">
@@ -52,12 +79,12 @@ function Profile() {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="card mb-4" id="">
+                            {/* <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Earnings</h5>
                                 <div className="card-body">
                                     <p id=""><a href="" className="btn"> See Earnings </a></p>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="text-center"></div>
                             <button href="" className='btn btn-warning' onClick={handleLogout}>Logout</button>
                         </div>

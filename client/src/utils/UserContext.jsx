@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
   const logInUser = (user) => {
     const login = true;
     const loggedInUser = { ...user, login };
-    setUser({ logged_in: true, email: loggedInUser.email });
+    setUser({ logged_in: true, email: loggedInUser });
   };
 
   // Function to logout the user

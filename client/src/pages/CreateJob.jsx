@@ -33,9 +33,38 @@ function CreateJob() {
                 const result = await response.json()
                 console.log(result.message)
                 if (result.message === 'Success') {
-                    //display success message then navigate to job page
-                    // navigate("/job-page", { state: { jobber: result.job.jobName } });
+                    //display success message then pull user data from local storage
                     console.log('yay job created successfully!');
+                    console.log('here is result.job._id ', result.job._id);
+                    const userData = JSON.parse(localStorage.getItem('user'))
+                    const userEmail = userData.email
+                    const urlString = `/api/user/${userEmail}`
+                    console.log('user email: ', userEmail);
+                    //Run fetch request to add job to user profile
+                    try {
+                        const response = await fetch(urlString, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                _id: result.job._id
+                            }),
+                        })
+
+                        const userResults = await response.json()
+
+                        if (userResults.message === "Success") {
+                            navigate("/job-page", { state: { jobber: result.job.jobName } });
+                        }
+                        else {
+                            console.log('error adding job to user')
+                        }
+                    } catch (error) {
+                        console.log(error)
+                    }
+
+
                 }
             } catch (error) {
                 console.log(error)

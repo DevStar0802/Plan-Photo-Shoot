@@ -29,7 +29,7 @@ module.exports = {
     async createJob(req, res) {
         try {
             const job = await Job.create(req.body);
-            res.json(job);
+            res.json({ job: job, message: "Success" });
         } catch (err) {
             return res.status(500).json('Error creating job:', err);
         }

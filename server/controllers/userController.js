@@ -115,7 +115,7 @@ module.exports = {
                     .json({ message: 'No user found with that email ' });
             }
 
-            res.json(user);
+            res.json({ user: user, message: "Success" });
         } catch (error) {
             res.status(500).json(error)
             console.log(error)

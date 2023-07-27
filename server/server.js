@@ -10,8 +10,6 @@ const routes = require('./routes');
 const app = express()
 const port = process.env.PORT || 3001
 
-const upload = multer({ dest: 'uploads/' }); // Destination directory for temporary file storage
-
 app.use(express.json()); // Middleware to parse JSON data
 
 app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
@@ -43,8 +41,6 @@ const sess = {
 app.use(session(sess));
 
 app.use(routes);
-
-app.use(upload)
 
 db.once('open', () => {
     app.listen(port, () => {

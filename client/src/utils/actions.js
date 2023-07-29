@@ -1,0 +1,2 @@
+export const DATA_TO_RESULTS = "DATA_TO_RESULTS";
+export const DATA_TO_CREATE_JOB = "DATA_TO_CREATE_JOB";

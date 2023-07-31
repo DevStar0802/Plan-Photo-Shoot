@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "",
     "dev": "vite",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "install-client": "cd client && npm i",

@@ -39,8 +39,7 @@ function Results() {
     //useEffect for creating map after geocode data returns
     useEffect(() => {
         let map = tt.map({
-            key: "CR9zb4MW99qE4ik0gEaOXSxkadG5A8xp",
-            // key: "TXl8IGi9uMFKMITo8xqikpNHR70GrQK5",
+            key: import.meta.env.VITE_MAP_API_KEY1,
             container: mapElement.current,
             center: coordinates,
             zoom: mapZoom

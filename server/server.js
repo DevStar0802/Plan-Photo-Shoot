@@ -21,6 +21,8 @@ app.use(uploadMiddleware.any()); // Handle any file uploads
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
+// Serve the static files from the client's build directory
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 
 //initialize session with secret, cookie, and store location
@@ -41,6 +43,11 @@ const sess = {
 app.use(session(sess));
 
 app.use(routes);
+
+// All other routes should serve the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 db.once('open', () => {
     app.listen(port, () => {

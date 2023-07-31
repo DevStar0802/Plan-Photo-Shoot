@@ -52,14 +52,16 @@ function MyJobs() {
                         <div className=" text-lg-left">
                             <h1 className="mb-4 text-center">My Jobs</h1>
                         </div>
-                        <div className="col-4 mb-4">
+                        {/* <div className="col-4 mb-4">
                             <a href="" className='btn btn-warning text-white fw-bold p-3'>Sort</a>
-                        </div>
+                        </div> */}
                         {displayJobs()}
                     </div>
-                    <div>
-                        <div className="col-12 border-bottom mb-3">
-                            <Link to={"/create-job"} className='btn btn-warning'>Create Job</Link>
+                </div>
+                <div className='row'>
+                    <div className="col-sm-10 col-lg-6 mx-auto mt-4 ">
+                        <div className="col-4 mb-4 mx-auto text-center">
+                            <Link to={"/create-job"} className='btn btn-warning text-white fw-bold'>Create Job</Link>
                         </div>
                     </div>
                 </div>

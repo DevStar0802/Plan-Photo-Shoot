@@ -32,14 +32,12 @@ function Profile() {
                 }),
             })
             const result = await response.json()
-            console.log('Here is the result from finding user: ', result);
             if (result.message === "Success") {
                 setUser(result.user)
             }
 
 
         } catch (error) {
-            console.log(error)
         }
     }
 

@@ -7,6 +7,10 @@ function CreateJob() {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    })
+
     const formik = useFormik({
         initialValues: {
             jobName: '',
@@ -31,14 +35,10 @@ function CreateJob() {
                 })
 
                 const result = await response.json()
-                console.log(result.message)
                 if (result.message === 'Success') {
                     //display success message then pull user data from local storage
-                    console.log('yay job created successfully!');
-                    console.log('here is result.job._id ', result.job._id);
                     const userEmail = JSON.parse(localStorage.getItem('user'))
                     const urlString = `/api/user/${userEmail}`
-                    console.log('user email: ', userEmail);
                     //Run fetch request to add job to user profile
                     try {
                         const response = await fetch(urlString, {

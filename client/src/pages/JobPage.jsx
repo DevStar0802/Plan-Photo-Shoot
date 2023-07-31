@@ -10,12 +10,12 @@ function JobPage() {
     //pull off the jobname from the location as state.jobber
     let { state } = useLocation();
     const urlJob = state.jobber;
-    console.log('This is the state pulled off the location and passed into the fetch request: ', urlJob)
 
     // When component mounts, call the fetch request for the job data
     useEffect(() => {
         fetchJobData(urlJob);
         getBucket()
+        window.scrollTo(0, 0);
     }, []);
 
     async function getBucket() {
@@ -27,7 +27,6 @@ function JobPage() {
                 }
             })
             let bucketData = await response.json()
-            console.log(bucketData)
         } catch (error) {
 
         }
@@ -46,14 +45,11 @@ function JobPage() {
                 }),
             })
             let jobData = await response.json()
-            console.log('This is Job Data', jobData)
             if (jobData.length === 0) {
                 console.log('No data from source for this jog')
             } else {
-                console.log('this is jobsData.date: ', jobData.job.date)
                 jobData.job.date = changeDate(jobData.job.date)
                 setJobs(jobData.job)
-                console.log('this is jobs after time change:', jobs)
             }
         } catch (error) {
             console.log(error)
@@ -70,7 +66,6 @@ function JobPage() {
                 const formData = new FormData();
                 let picsArray = Array.from(values.pictures)
                 if (values.pictures?.length) { // Check if pictures exist and have length
-                    console.log('array of pictures for fetch request: ', picsArray)
                     picsArray.forEach((file) => {
                         formData.append('files', file);
                     });
@@ -81,7 +76,6 @@ function JobPage() {
                     });
 
                     const result = await response.json();
-                    console.log(result.message);
                 }
                 else {
                     console.log('did not send for fetch request')
@@ -97,7 +91,6 @@ function JobPage() {
     const handleFileChange = (event) => {
         const files = event.target.files;
         formik.setFieldValue('pictures', files);
-        console.log('the files we are setting to picture value from form change: ', files)
     };
 
 

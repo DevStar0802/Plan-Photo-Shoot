@@ -67,11 +67,9 @@ function Results() {
     //calls createList to get detailed data and saves to storage/searchData
     const packingList = function () {
         const object = JSON.parse(localStorage.getItem('searchForm'));
-        console.log('here is object: ', object);
         const newObject = createList(object)
         localStorage.setItem('searchForm', JSON.stringify(newObject))
         setSearchData(newObject)
-        console.log('this is the object that should be now saved to local:', newObject)
     }
 
 
@@ -115,8 +113,8 @@ function Results() {
     const renderPackingList = function () {
         if (searchData.packingList) {
             return searchData.packingList.map(pack =>
-                <div>
-                    <li>{pack}</li>
+                <div key={pack}>
+                    <li key={pack}>{pack}</li>
                 </div>)
         }
     }

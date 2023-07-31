@@ -24,7 +24,6 @@ function MyJobs() {
                 }),
             })
             const result = await response.json()
-            console.log(result)
 
             allJobs = result.user.jobs
             setJobs(allJobs)
@@ -37,15 +36,15 @@ function MyJobs() {
 
     function displayJobs() {
         return jobs.map(job =>
-            <div className="card mb-4" id="">
-                <h5 className="card-header fw-bold border-0">{job.jobName}</h5>
-                <div className="card-body">
-                    <h5>Address:</h5>
-                    <Link className='text-decoration-none ' to={"/job-page"} state={{ jobber: job.jobName }}>
-                        <p id="">{job.address}</p>
+            <div className="card mb-4" key={"div1 " + job.jobName}>
+                <h5 className="card-header fw-bold border-0" key={"header " + job.jobName}>{job.jobName}</h5>
+                <div className="card-body" key={"div2 " + job.jobName}>
+                    <h5 key={"address " + job.jobName}>Address:</h5>
+                    <Link className='text-decoration-none ' to={"/job-page"} state={{ jobber: job.jobName }} key={"Link " + job.jobName}>
+                        <p id="" key={"address" + job.jobName}>{job.address}</p>
                     </Link>
-                    <h5>Price:</h5>
-                    <p id="">{job.price}</p>
+                    <h5 key={"price header" + job.jobName}>Price:</h5>
+                    <p id="" key={"price" + job.jobName}>{job.price}</p>
                 </div>
             </div>
         )

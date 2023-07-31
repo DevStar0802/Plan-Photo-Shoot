@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { useUserContext } from '../utils/UserContext';
@@ -55,29 +55,37 @@ function Login() {
                             <h1 className="mb-4 text-center">Login</h1>
                             <div className=" mb-4" id="">
                                 <form onSubmit={formik.handleSubmit}>
-                                    <label htmlFor="email" className='text-dark'>Email Address</label>
-                                    <div>
-                                        <input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            onChange={formik.handleChange}
-                                            value={formik.values.email}
-                                        />
+                                    <div className='mb-3'>
+                                        <label htmlFor="email" className='form-label text-dark'>Email Address</label>
+                                        <div>
+                                            <input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                className='form-control'
+                                                onChange={formik.handleChange}
+                                                value={formik.values.email}
+                                            />
+                                        </div>
                                     </div>
-                                    <label htmlFor="password" className='text-dark'>Password</label>
-                                    <div>
-
-                                        <input
-                                            id="password"
-                                            name="password"
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                            value={formik.values.password}
-                                        />
+                                    <div className='mb-3'>
+                                        <label htmlFor="password" className='text-dark'>Password</label>
+                                        <div>
+                                            <input
+                                                id="password"
+                                                name="password"
+                                                type="password"
+                                                className='form-control'
+                                                onChange={formik.handleChange}
+                                                value={formik.values.password}
+                                            />
+                                        </div>
                                     </div>
-                                    <button type='submit'>Login</button>
+                                    <button type='submit' className='btn btn-warning'>Login</button>
                                 </form>
+                            </div>
+                            <div>
+                                <p>New? Click to <Link to={'/signup'}>sign up!</Link></p>
                             </div>
                         </div>
                     </div>

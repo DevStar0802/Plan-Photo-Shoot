@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as bootstrap from 'bootstrap'
@@ -15,6 +14,7 @@ import MyJobs from './pages/MyJobs'
 import JobPage from './pages/JobPage'
 import Login from './pages/Login'
 import Results from './pages/Results'
+import Signup from './pages/Signup'
 import { UserProvider } from './utils/UserContext';
 
 function App() {
@@ -42,6 +42,9 @@ function App() {
           <Route
             path="/login"
             element={<Login />} />
+          <Route
+            path="/signup"
+            element={<Signup />} />
           <Route
             path="/results"
             element={<Results />} />

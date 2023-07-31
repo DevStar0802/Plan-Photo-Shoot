@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 //initialize session with secret, cookie, and store location
 const sess = {
-    secret: 'User Login Session',
+    secret: 'User Login Session Secret',
     cookie: {
         maxAge: 7200000,
         httpOnly: true,

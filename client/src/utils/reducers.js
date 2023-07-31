@@ -1,4 +1,3 @@
-import { useReducer } from 'react';
 import {
     DATA_TO_RESULTS,
     DATA_TO_CREATE_JOB
@@ -9,10 +8,7 @@ export const reducer = (state, action) => {
 
         //action to pass data from main page to results page
         case DATA_TO_RESULTS:
-            return {
-                ...state,
-                form: [...action.form],
-            };
+            return { ...state, searchForm: action.payload };
 
         //action to pass data from results page to create job page
         case DATA_TO_CREATE_JOB:
@@ -25,7 +21,3 @@ export const reducer = (state, action) => {
             return state;
     }
 };
-
-export function useFormReducer(initialState) {
-    return useReducer(reducer, initialState);
-}

@@ -13,7 +13,23 @@ function JobPage() {
     // When component mounts, call the fetch request for the job data
     useEffect(() => {
         fetchJobData(urlJob);
+        getBucket()
     }, []);
+
+    async function getBucket() {
+        try {
+            const response = await fetch("/api/job/buckets", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            let bucketData = await response.json()
+            console.log(bucketData)
+        } catch (error) {
+
+        }
+    }
 
     // Fetch the data to populate the page with name, price, etc.
     async function fetchJobData(name) {
@@ -45,25 +61,29 @@ function JobPage() {
     // Form handler that handles uploading photos
     const formik = useFormik({
         initialValues: {
-            pictures: [],
+            pictures: []
         },
         onSubmit: async values => {
             try {
                 const formData = new FormData();
+                let picsArray = Array.from(values.pictures)
+                if (values.pictures?.length) { // Check if pictures exist and have length
+                    console.log('array of pictures for fetch request: ', picsArray)
+                    picsArray.forEach((file) => {
+                        formData.append('files', file);
+                    });
 
-                // Convert FileList to array using Array.from
-                const picturesArray = Array.from(values.pictures);
-                picturesArray.forEach((picture) => {
-                    formData.append('picture_${index}', picture);
-                });
-                console.log('here is the formData: ', formData)
-                const response = await fetch('/api/job/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
+                    const response = await fetch('/api/job/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
 
-                const result = await response.json()
-                console.log(result.message)
+                    const result = await response.json();
+                    console.log(result.message);
+                }
+                else {
+                    console.log('did not send for fetch request')
+                }
             } catch (error) {
                 console.log('We have an error:', error)
             }
@@ -71,6 +91,27 @@ function JobPage() {
         },
     });
 
+    // File input change handler
+    const handleFileChange = (event) => {
+        const files = event.target.files;
+        formik.setFieldValue('pictures', files);
+        console.log('the files we are setting to picture value from form change: ', files)
+    };
+
+
+    function imageLoop() {
+        const brent = [
+            'brent1',
+            'brent2',
+            'brent3'
+        ]
+
+        const url = 'https://text-bucket-bb.s3.us-east-2.amazonaws.com/'
+        return brent.map(brent =>
+            <div>
+                <img src={url + brent + ".jpg"} alt="" className="w-100 mb-3" />
+            </div>)
+    }
 
     return (
         <section className="projects-section bg-light" id="results">
@@ -122,12 +163,16 @@ function JobPage() {
                                     <p id=""> {jobs.notes}</p>
                                 </div>
                             </div>
+                            <div className="card mb-4" id="">
+                                <h5 className="card-header fw-bold">Images</h5>
+                                <div className="card-body">
+                                    {imageLoop()}
+                                </div>
+                            </div>
                             {/* Form to upload Photos */}
                             <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                                 <div className='py-2'>
-                                    <input class="form-control" type="file" multiple name="pictures" onChange={(event) => {
-                                        formik.setFieldValue('pictures', event.currentTarget.files);
-                                    }} />
+                                    <input class="form-control" type="file" multiple name="pictures" onChange={handleFileChange} />
                                 </div>
                                 <div className='py-2'>
                                     <button type='submit' className='btn btn-warning p-3 '>Upload Photos</button>

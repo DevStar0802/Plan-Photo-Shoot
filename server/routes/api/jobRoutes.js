@@ -8,7 +8,7 @@ const {
     updateJob,
 } = require('../../controllers/jobController.js');
 
-const { getBuckets } = require('../../controllers/uploadController.js')
+const { getBuckets, uploadFiles } = require('../../controllers/uploadController.js')
 
 // /api/job
 router.route('/').get(getJobs).post(createJob);
@@ -21,7 +21,8 @@ router
     .delete(deleteJob);
 
 // /api/job/upload
-// router.route('/upload').post(upload.array('pictures'), handleFileUpload)
-router.route('/upload').get(getBuckets)
+router.route('/buckets').get(getBuckets)
+
+router.route('/upload').post(upload.array('files', 50), uploadFiles);
 
 module.exports = router;

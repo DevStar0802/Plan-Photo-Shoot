@@ -1,7 +1,6 @@
 const multer = require('multer');
 
 // Set up multer to handle file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ dest: 'uploads/' }); // Destination directory for temporary file storage
 
 module.exports = upload;

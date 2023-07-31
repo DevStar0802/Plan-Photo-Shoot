@@ -108,19 +108,6 @@ function flight(a) {
 }
 
 
-
-// Show Results Page 
-function showResults() {
-    if (!camera && !fly && !virt) {
-        alert('Please Select Atleast One: Photos, Drone, or Virtual Tour')
-        return;
-    }
-    photoFormSection.setAttribute('style', 'display: none;')
-    masthead.setAttribute('style', 'display: none;')
-    results.setAttribute('style', 'display: block;')
-
-}
-
 //loop over equipment to make packing list and show appropiate drone card
 function createList() {
     if (camera) {
@@ -159,22 +146,7 @@ function createList() {
     }
 }
 
-//show the landing page and form again
-function showMain() {
-    photoFormSection.setAttribute('style', 'display: block;')
-    masthead.setAttribute('style', 'display: block;')
-    results.setAttribute('style', 'display: none;')
-    droneCard.setAttribute('style', 'display: none;')
-    photoCard.setAttribute('style', 'display: none;')
-}
 
-//reset the packing list by deleting li's
-function deleteList() {
-    let liArray = document.querySelectorAll('#packing-list li')
-    liArray.forEach(li => {
-        li.remove()
-    })
-}
 
 const init = (e) => {
     e.preventDefault()
@@ -183,26 +155,7 @@ const init = (e) => {
     equip();
 }
 
-photoForm.addEventListener("submit", async function (e) {
-    init(e);
-    showResults();
-    createList();
-    window.scrollTo(0, 0)
-})
 
-//event listeners for buttons to return to landing page and make new submission
-newSearch.addEventListener("click", function () {
-    deleteList();
-    showMain();
-    location.reload()
-    window.scrollTo(0, 0)
-})
-newSearch2.addEventListener("click", function () {
-    deleteList();
-    showMain();
-    location.reload()
-    window.scrollTo(0, 0)
-})
 
 
 

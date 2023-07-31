@@ -13,6 +13,17 @@ export const UserProvider = ({ children }) => {
     email: ''
   });
 
+  const [searchForm, setSearchForm] = useState({
+    address: '',
+    city: '',
+    state: '',
+    sqFt: 0,
+    milesFromAir: 0,
+    photos: false,
+    drone: false,
+    tour: false
+  });
+
   // Function to login the user
   const logInUser = (user) => {
     const login = true;
@@ -29,7 +40,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ logInUser, logOutUser, users }}>
+      value={{ logInUser, logOutUser, users, setUser, searchForm, setSearchForm }}>
       {/* We render children in our component so that any descendent can access the value from the provider */}
       {children}
     </UserContext.Provider>

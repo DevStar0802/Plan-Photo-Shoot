@@ -14,6 +14,7 @@ import CreateJob from './pages/CreateJob'
 import MyJobs from './pages/MyJobs'
 import JobPage from './pages/JobPage'
 import Login from './pages/Login'
+import Results from './pages/Results'
 import { UserProvider } from './utils/UserContext';
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
           <Route
             path="/login"
             element={<Login />} />
+          <Route
+            path="/results"
+            element={<Results />} />
         </Routes>
         <Footer />
       </UserProvider>

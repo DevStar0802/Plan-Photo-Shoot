@@ -12,32 +12,34 @@ module.exports = {
             console.log(error);
             res.send(error);
         }
+    },
+
+    async uploadFiles(req, res) {
+        try {
+            if (!req.files || req.files.length === 0) {
+                return res.status(400).send('No files uploaded');
+            }
+
+            for (const file of req.files) {
+                const fileContent = fs.readFileSync(file.path); // Read the file from the temporary path
+                const params = {
+                    Bucket: 'text-bucket-bb',
+                    Key: file.originalname, // Use the original file name in the S3 bucket
+                    Body: fileContent
+                };
+
+                const command = new PutObjectCommand(params);
+                await AwsClient.s3Instance.send(command);
+
+                fs.unlinkSync(file.path); // Delete the temporary file
+            }
+
+            res.send('Files uploaded successfully!');
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Error uploading the files');
+        }
     }
-
-    // async uploadFiles(req, res) {
-    //     try {
-    //         if (!req.file) {
-    //             return res.status(400).send('No file uploaded');
-    //         }
-
-    //         const fileContent = fs.readFileSync(req.file.path); // Read the file from the temporary path
-    //         const params = {
-    //             Bucket: 'text-bucket-bb',
-    //             Key: req.file.originalname, // Use the original file name in the S3 bucket
-    //             Body: fileContent
-    //         };
-
-    //         const command = new PutObjectCommand(params);
-    //         await AwsClient.s3Instance.send(command);
-
-    //         fs.unlinkSync(req.file.path); // Delete the temporary file
-
-    //         res.send('File uploaded successfully!');
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.status(500).send('Error uploading the file');
-    //     }
-    // }
 
     // async downloadFiles(req, res) {
     //     const command = new GetObjectCommand({

@@ -17,7 +17,6 @@ function Profile() {
 
     useEffect(() => {
         const userEmail = JSON.parse(localStorage.getItem('user'));
-        // const userEmail = 'benji@gmail.com'
         fetchUserData(userEmail);
     }, []);
 
@@ -79,12 +78,6 @@ function Profile() {
                                     </Link>
                                 </div>
                             </div>
-                            {/* <div className="card mb-4" id="">
-                                <h5 className="card-header fw-bold">Earnings</h5>
-                                <div className="card-body">
-                                    <p id=""><a href="" className="btn"> See Earnings </a></p>
-                                </div>
-                            </div> */}
                             <div className="text-center"></div>
                             <button href="" className='btn btn-warning' onClick={handleLogout}>Logout</button>
                         </div>

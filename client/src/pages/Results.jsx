@@ -10,6 +10,8 @@ import { useUserContext } from '../utils/UserContext'
 //import the fetch request to get lat and long
 import getTomTomData from '../utils/Map'
 
+import createList from '../utils/PackingList';
+
 function Results() {
     const { searchForm, setSearchForm } = useUserContext();
     //Map stuff
@@ -21,6 +23,12 @@ function Results() {
     //useEffect to get coordinates from address
     useEffect(() => {
         geocodeData()
+    }, []);
+
+    //useEffect to get extra details
+    useEffect(() => {
+        let updatedObj = packingList()
+        displayPreparation(updatedObj)
     }, []);
 
     //useEffect for creating map after geocode data returns
@@ -41,12 +49,62 @@ function Results() {
         return () => map.remove();
     }, [coordinates]);
 
+
+
     //sends address to geocode function to return coordinates
-    let geocodeData = async function () {
+    const geocodeData = async function () {
         const savedSearchForm = JSON.parse(localStorage.getItem('searchForm'));
         let tomTomData = await getTomTomData(savedSearchForm)
         setCoordinates(tomTomData)
         return tomTomData
+    }
+
+    const packingList = function () {
+        const object = JSON.parse(localStorage.getItem('searchForm'));
+        const newObject = createList(object)
+        localStorage.setItem('searchForm', JSON.stringify(newObject))
+        console.log('this is the object that should be now saved to local:', newObject)
+    }
+
+    const displayPreparation = function (obj) {
+
+    }
+
+    const renderPhotos = function () {
+        return (
+            searchForm.photos == true ?
+                <div class="row">
+                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div class=" text-lg-left">
+                            <div class="card" id="photo-card" >
+                                <h5 class="card-header fw-bold">Number of HDR Photos</h5>
+                                <div class="card-body">
+                                    <p id="num-photos"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> : <></>
+        )
+    }
+
+    const renderDrone = function () {
+        return (
+            searchForm.drone == true ?
+                <div class="row" id="drone-card" >
+                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div class=" text-lg-left">
+                            <div class="card">
+                                <h5 class="card-header fw-bold">Flight Restrictions</h5>
+                                <div class="card-body">
+                                    <p id="flight-restrictions"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                : <></>
+        )
     }
 
     return (
@@ -66,6 +124,13 @@ function Results() {
                     <div class="col-sm-12 col-lg-8 mx-auto mt-4">
                         <div class=" text-lg-left">
                             <h2 class="mb-4">Your Preparation </h2>
+                        </div>
+                    </div>
+                </div>
+                {renderPhotos()}
+                {/* <div class="row">
+                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div class=" text-lg-left">
                             <div class="card" id="photo-card" >
                                 <h5 class="card-header fw-bold">Number of HDR Photos</h5>
                                 <div class="card-body">
@@ -74,8 +139,9 @@ function Results() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" id="drone-card" >
+                </div> */}
+                {renderDrone()}
+                {/* <div class="row" id="drone-card" >
                     <div class="col-sm-12 col-lg-8 mx-auto mt-4">
                         <div class=" text-lg-left">
                             <div class="card">
@@ -86,7 +152,7 @@ function Results() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div class="row">
                     <div class="col-sm-12 col-lg-8 mx-auto mt-4">
                         <div id="list mt-4 text-lg-left">

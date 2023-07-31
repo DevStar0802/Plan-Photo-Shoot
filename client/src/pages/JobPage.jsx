@@ -4,6 +4,8 @@ import { changeDate } from '../utils/Date'
 import { useFormik } from 'formik';
 
 function JobPage() {
+    // State to track whether link is copied or not
+    const [isLinkCopied, setIsLinkCopied] = useState(false);
     const [jobs, setJobs] = useState({})
     //pull off the jobname from the location as state.jobber
     let { state } = useLocation();
@@ -113,6 +115,20 @@ function JobPage() {
             </div>)
     }
 
+    function handleCopyLink() {
+        // Get the current URL
+        const currentURL = window.location.href;
+
+        // Copy the link to the clipboard using the Clipboard API
+        navigator.clipboard.writeText(currentURL).then(() => {
+            // Show the tooltip for 2 seconds (adjust as needed)
+            setIsLinkCopied(true);
+            setTimeout(() => {
+                setIsLinkCopied(false);
+            }, 2000);
+        });
+    }
+
     return (
         <section className="projects-section bg-light" id="results">
             <div className="container px-4 px-lg-5" id="results-cont">
@@ -122,10 +138,30 @@ function JobPage() {
                         <div className=" text-lg-left">
                             <h1 className="mb-4 text-center">{jobs.jobName || "jobs"}</h1>
                             <div className='text-center'>
-                                <h2 className='fs-4 text-primary' >{jobs.price || 'Price'}</h2>
+                                <h2 className='fs-2 text-primary' >${jobs.price || 'Price'}</h2>
+                            </div>
+                            <div className='text-center '>
+                                {/* <p className='text-warning fs-4'>{isLinkCopied ? 'Link Copied!' : ''}</p> */}
+                                {isLinkCopied && (
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            top: '270px', // Adjust the position as needed
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            background: '#f0ad4e',
+                                            color: 'white',
+                                            padding: '5px 10px',
+                                            borderRadius: '5px',
+                                            boxShadow: '1px 1px 5px rgba(0, 0, 0, 0.3)',
+                                        }}
+                                    >
+                                        Link Copied!
+                                    </div>
+                                )}
                             </div>
                             <div className='text-center'>
-                                <a className='my-3 btn btn-warning' >{jobs.shareLink || 'Share Link'}</a>
+                                <a className='my-3 btn btn-warning' onClick={handleCopyLink} >{jobs.shareLink || 'Share Link'}</a>
                             </div>
                             <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Date</h5>
@@ -163,21 +199,21 @@ function JobPage() {
                                     <p id=""> {jobs.notes}</p>
                                 </div>
                             </div>
-                            <div className="card mb-4" id="">
+                            {/* <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Images</h5>
                                 <div className="card-body">
                                     {imageLoop()}
                                 </div>
-                            </div>
+                            </div> */}
                             {/* Form to upload Photos */}
-                            <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+                            {/* <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                                 <div className='py-2'>
                                     <input class="form-control" type="file" multiple name="pictures" onChange={handleFileChange} />
                                 </div>
                                 <div className='py-2'>
                                     <button type='submit' className='btn btn-warning p-3 '>Upload Photos</button>
                                 </div>
-                            </form>
+                            </form> */}
                         </div>
                     </div>
                 </div>

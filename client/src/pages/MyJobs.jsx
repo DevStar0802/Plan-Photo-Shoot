@@ -37,11 +37,18 @@ function MyJobs() {
 
     function displayJobs() {
         return jobs.map(job =>
-            <div>
-                <div className="col-12 border-bottom mb-3">
-                    <p className='fs-5 fw-bold' key={job.jobName}>{job.address} ----- <Link to={"/job-page"} state={{ jobber: job.jobName }}>{job.jobName}</Link>  ----- {job.price}</p>
+            <div className="card mb-4" id="">
+                <h5 className="card-header fw-bold border-0">{job.jobName}</h5>
+                <div className="card-body">
+                    <h5>Address:</h5>
+                    <Link className='text-decoration-none ' to={"/job-page"} state={{ jobber: job.jobName }}>
+                        <p id="">{job.address}</p>
+                    </Link>
+                    <h5>Price:</h5>
+                    <p id="">{job.price}</p>
                 </div>
-            </div>)
+            </div>
+        )
     }
 
     return (

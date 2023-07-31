@@ -80,16 +80,16 @@ function MainPage() {
                                     <input type="number" className="form-control" id="milesFromAir" min="0" onChange={formik.handleChange} values={formik.values.milesFromAir} />
                                 </div>
                                 <div className="mb-3 form-check">
-                                    <input type="checkbox" className="form-check-input " id="hdr" />
-                                    <label className="form-check-label" htmlFor="hdr" onChange={formik.handleChange} checked={formik.values.photos}>Are you taking HDR photos?</label>
+                                    <input type="checkbox" className="form-check-input " id="photos" onChange={formik.handleChange} checked={formik.values.photos} />
+                                    <label className="form-check-label" htmlFor="photos" >Are you taking HDR photos?</label>
                                 </div>
                                 <div className="mb-3 form-check">
-                                    <input type="checkbox" className="form-check-input " id="drone" />
-                                    <label className="form-check-label" htmlFor="drone" onChange={formik.handleChange} checked={formik.values.drone}>Are you taking drone photos?</label>
+                                    <input type="checkbox" className="form-check-input " id="drone" onChange={formik.handleChange} checked={formik.values.drone} />
+                                    <label className="form-check-label" htmlFor="drone" >Are you taking drone photos?</label>
                                 </div>
                                 <div className="mb-3 form-check">
-                                    <input type="checkbox" className="form-check-input" id="tour" />
-                                    <label className="form-check-label" htmlFor="tour" onChange={formik.handleChange} checked={formik.values.tour}>Are you capturing a virtual tour?</label>
+                                    <input type="checkbox" className="form-check-input" id="tour" onChange={formik.handleChange} checked={formik.values.tour} />
+                                    <label className="form-check-label" htmlFor="tour" >Are you capturing a virtual tour?</label>
                                 </div>
                                 <div className="text-center">
                                     <button type="submit" id="btn-submit" className="btn btn-warning text-center">Submit</button>

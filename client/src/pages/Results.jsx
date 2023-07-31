@@ -19,6 +19,7 @@ function Results() {
     const [mapZoom, setMapZoom] = useState(10);
     const [map, setMap] = useState({});
     const [coordinates, setCoordinates] = useState({ lat: 33.42919, lon: -111.73205 });
+    const [searchData, setSearchData] = useState({})
 
     //useEffect to get coordinates from address
     useEffect(() => {
@@ -27,8 +28,7 @@ function Results() {
 
     //useEffect to get extra details
     useEffect(() => {
-        let updatedObj = packingList()
-        displayPreparation(updatedObj)
+        packingList()
     }, []);
 
     //useEffect for creating map after geocode data returns
@@ -63,41 +63,39 @@ function Results() {
         const object = JSON.parse(localStorage.getItem('searchForm'));
         const newObject = createList(object)
         localStorage.setItem('searchForm', JSON.stringify(newObject))
+        setSearchData(newObject)
         console.log('this is the object that should be now saved to local:', newObject)
     }
 
-    const displayPreparation = function (obj) {
-
-    }
 
     const renderPhotos = function () {
         return (
-            searchForm.photos == true ?
-                <div class="row">
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <div class="card" id="photo-card" >
-                                <h5 class="card-header fw-bold">Number of HDR Photos</h5>
-                                <div class="card-body">
-                                    <p id="num-photos"></p>
+            searchData?.photos === true && searchData?.numPhotos ? (
+                <div className="row">
+                    <div className="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div className=" text-lg-left">
+                            <div className="card" id="photo-card" >
+                                <h5 className="card-header fw-bold">Number of HDR Photos</h5>
+                                <div className="card-body">
+                                    <p id="num-photos" className='fs-5'>{searchData.numPhotos}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> : <></>
+                </div>) : <></>
         )
     }
 
     const renderDrone = function () {
         return (
-            searchForm.drone == true ?
-                <div class="row" id="drone-card" >
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <div class="card">
-                                <h5 class="card-header fw-bold">Flight Restrictions</h5>
-                                <div class="card-body">
-                                    <p id="flight-restrictions"></p>
+            searchData.drone == true ?
+                <div className="row" id="drone-card" >
+                    <div className="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div className=" text-lg-left">
+                            <div className="card">
+                                <h5 className="card-header fw-bold">Flight Restrictions</h5>
+                                <div className="card-body">
+                                    <p id="flight-restrictions" className='fs-5'>{searchData.fRestrictions}</p>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +105,20 @@ function Results() {
         )
     }
 
+    const renderPackingList = function () {
+        if (searchData.packingList) {
+            return searchData.packingList.map(pack =>
+                <div>
+                    <li>{pack}</li>
+                </div>)
+        }
+
+    }
+
     return (
-        <section class="projects-section bg-light" id="results" >
-            <div class="container px-4 px-lg-5" id="results-cont">
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <section className="projects-section bg-light" id="results" >
+            <div className="container px-4 px-lg-5" id="results-cont">
+                <div className="row gx-0 mb-4 mb-lg-5 align-items-center">
                     {/* Div for map render */}
                     <div className="">
                         <div className="mapContainer">
@@ -120,47 +128,24 @@ function Results() {
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <h2 class="mb-4">Your Preparation </h2>
+                <div className="row">
+                    <div className="col-sm-12 col-lg-8 mx-auto mt-4">
+                        <div className=" text-lg-left">
+                            <h2 className="mb-4">Your Preparation </h2>
                         </div>
                     </div>
                 </div>
                 {renderPhotos()}
-                {/* <div class="row">
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <div class="card" id="photo-card" >
-                                <h5 class="card-header fw-bold">Number of HDR Photos</h5>
-                                <div class="card-body">
-                                    <p id="num-photos"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
                 {renderDrone()}
-                {/* <div class="row" id="drone-card" >
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div class=" text-lg-left">
-                            <div class="card">
-                                <h5 class="card-header fw-bold">Flight Restrictions</h5>
-                                <div class="card-body">
-                                    <p id="flight-restrictions"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <div class="row">
-                    <div class="col-sm-12 col-lg-8 mx-auto mt-4">
+                <div className="row">
+                    <div className="col-sm-12 col-lg-8 mx-auto mt-4">
                         <div id="list mt-4 text-lg-left">
-                            <div class="card">
-                                <h5 class="card-header fw-bold">Packing List</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title ">Bring the following...</h5>
+                            <div className="card">
+                                <h5 className="card-header fw-bold">Packing List</h5>
+                                <div className="card-body">
+                                    <h5 className="card-title ">Bring the following...</h5>
                                     <ul id="packing-list">
+                                        {renderPackingList()}
                                     </ul>
                                 </div>
                             </div>
@@ -168,8 +153,8 @@ function Results() {
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-8 mx-auto text-center mt-4">
-                <a href="#photo-form" class="btn btn-warning text-center mx-auto" id="new-search">New Search</a>
+            <div className="col-sm-12 col-lg-8 mx-auto text-center mt-4">
+                <a href="#photo-form" className="btn btn-warning text-center mx-auto" id="new-search">New Search</a>
             </div>
         </section>
     )

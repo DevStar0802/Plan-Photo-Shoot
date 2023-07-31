@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "",
+    "start": "cd server && npm start",
     "dev": "vite",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",

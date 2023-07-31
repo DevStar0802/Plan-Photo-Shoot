@@ -20,6 +20,8 @@ let tourList = [
 let masterList = []
 
 const createList = function (obj) {
+    obj.packingList = []
+    masterList = []
     let newObj = packingList(obj)
     newObj = droneRestrictions(newObj)
     newObj = numberPhotos(newObj)
@@ -35,12 +37,12 @@ const packingList = function (obj) {
     }
     if (obj.drone == true) {
         droneList.forEach(el => {
-            camList.push(el)
+            masterList.push(el)
         })
     }
     if (obj.tour == true) {
         tourList.forEach(el => {
-            camList.push(el)
+            masterList.push(el)
         })
     }
     obj.packingList = masterList
@@ -51,11 +53,11 @@ const packingList = function (obj) {
 const droneRestrictions = function (obj) {
     let restriction = ''
     if (obj.drone == true) {
-        switch (obj.milesFromAir) {
-            case obj.milesFromAir < 1:
+        switch (true) {
+            case (obj.milesFromAir <= 1):
                 restriction = 'No Fly Zone'
                 break;
-            case obj.milesFromAir < 2:
+            case (obj.milesFromAir < 2):
                 restriction = '100ft cieling'
                 break;
             case obj.milesFromAir < 3:
@@ -76,17 +78,17 @@ const droneRestrictions = function (obj) {
 //create the number of photos object
 const numberPhotos = function (obj) {
     if (obj.photos == true) {
-        switch (obj.photos) {
-            case obj.photos < 2000:
+        switch (true) {
+            case obj.sqFt < 2000:
                 obj.numPhotos = 20
                 break;
-            case obj.photos < 3000:
+            case obj.sqFt < 3000:
                 obj.numPhotos = 30
                 break;
-            case obj.photos < 4000:
+            case obj.sqFt < 4000:
                 obj.numPhotos = 40
                 break;
-            case obj.photos < 5000:
+            case obj.sqFt < 5000:
                 obj.numPhotos = 50
                 break;
             default:

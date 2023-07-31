@@ -15,10 +15,7 @@ function MainPage() {
 
     //pull in the search form data from local storage
     useEffect(() => {
-        const savedSearchForm = JSON.parse(localStorage.getItem('searchForm'));
-        if (savedSearchForm) {
-            setSearchForm(savedSearchForm);
-        }
+        localStorage.removeItem("searchForm");
     }, []);
 
     // set form values to local storage and to userContext

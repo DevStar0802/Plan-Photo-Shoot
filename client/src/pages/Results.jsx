@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef, useReducer } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom';
 
 //Map stuff
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import tt from '@tomtom-international/web-sdk-maps';
-
-// import context
-import { useUserContext } from '../utils/UserContext'
 
 //import the fetch request to get lat and long
 import getTomTomData from '../utils/Map'
@@ -13,13 +11,20 @@ import getTomTomData from '../utils/Map'
 import createList from '../utils/PackingList';
 
 function Results() {
-    const { searchForm, setSearchForm } = useUserContext();
     //Map stuff
     const mapElement = useRef();
     const [mapZoom, setMapZoom] = useState(10);
     const [map, setMap] = useState({});
     const [coordinates, setCoordinates] = useState({ lat: 33.42919, lon: -111.73205 });
     const [searchData, setSearchData] = useState({})
+
+    //useEffect to reset packlist
+    useEffect(() => {
+        const oldData = JSON.parse(localStorage.getItem('searchForm'));
+        oldData.packingList = []
+        localStorage.setItem('searchForm', JSON.stringify(oldData));
+        window.scrollTo(0, 0);
+    }, []);
 
     //useEffect to get coordinates from address
     useEffect(() => {
@@ -59,8 +64,10 @@ function Results() {
         return tomTomData
     }
 
+    //calls createList to get detailed data and saves to storage/searchData
     const packingList = function () {
         const object = JSON.parse(localStorage.getItem('searchForm'));
+        console.log('here is object: ', object);
         const newObject = createList(object)
         localStorage.setItem('searchForm', JSON.stringify(newObject))
         setSearchData(newObject)
@@ -112,8 +119,12 @@ function Results() {
                     <li>{pack}</li>
                 </div>)
         }
-
     }
+
+    // Scroll to the top of the page
+    const handleNewSearchClick = () => {
+        window.scrollTo(0, 0);
+    };
 
     return (
         <section className="projects-section bg-light" id="results" >
@@ -154,7 +165,7 @@ function Results() {
                 </div>
             </div>
             <div className="col-sm-12 col-lg-8 mx-auto text-center mt-4">
-                <a href="#photo-form" className="btn btn-warning text-center mx-auto" id="new-search">New Search</a>
+                <Link to={'/'} onClick={handleNewSearchClick} className="btn btn-warning text-center mx-auto" id="new-search">New Search</Link>
             </div>
         </section>
     )

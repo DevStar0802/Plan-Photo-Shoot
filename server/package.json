@@ -5,11 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "vite",
-    "watch": "nodemon",
-    "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "watch": "nodemon"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.378.0",

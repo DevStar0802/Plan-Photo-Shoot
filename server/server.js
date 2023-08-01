@@ -20,7 +20,6 @@ app.use(uploadMiddleware.any()); // Handle any file uploads
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'views')));
 // Serve the static files from the client's build directory
 app.use(express.static(path.join(__dirname, '../client/build')));
 

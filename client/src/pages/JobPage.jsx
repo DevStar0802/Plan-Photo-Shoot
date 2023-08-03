@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { changeDate } from '../utils/Date'
 import { useFormik } from 'formik';
+import { apiBaseUrl } from '../utils/API';
+
 
 function JobPage() {
     // State to track whether link is copied or not
@@ -20,7 +22,7 @@ function JobPage() {
 
     async function getBucket() {
         try {
-            const response = await fetch("/api/job/buckets", {
+            const response = await fetch(`${apiBaseUrl}/api/job/buckets`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -35,7 +37,7 @@ function JobPage() {
     // Fetch the data to populate the page with name, price, etc.
     async function fetchJobData(name) {
         try {
-            const response = await fetch("/api/job/focus", {
+            const response = await fetch(`${apiBaseUrl}/api/job/focus`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -70,7 +72,7 @@ function JobPage() {
                         formData.append('files', file);
                     });
 
-                    const response = await fetch('/api/job/upload', {
+                    const response = await fetch(`${apiBaseUrl}/api/job/upload`, {
                         method: 'POST',
                         body: formData,
                     });
@@ -133,8 +135,7 @@ function JobPage() {
                             <div className='text-center'>
                                 <h2 className='fs-2 text-primary' >${jobs.price || 'Price'}</h2>
                             </div>
-                            <div className='text-center '>
-                                {/* <p className='text-warning fs-4'>{isLinkCopied ? 'Link Copied!' : ''}</p> */}
+                            {/* <div className='text-center '>
                                 {isLinkCopied && (
                                     <div
                                         style={{
@@ -155,7 +156,7 @@ function JobPage() {
                             </div>
                             <div className='text-center'>
                                 <a className='my-3 btn btn-warning' onClick={handleCopyLink} >{jobs.shareLink || 'Share Link'}</a>
-                            </div>
+                            </div> */}
                             <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Date</h5>
                                 <div className="card-body">

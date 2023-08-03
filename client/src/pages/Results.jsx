@@ -112,7 +112,7 @@ function Results() {
     const renderPackingList = function () {
         if (searchData.packingList) {
             return searchData.packingList.map(pack =>
-                <div key={pack}>
+                <div key={"div" + pack}>
                     <li key={pack}>{pack}</li>
                 </div>)
         }

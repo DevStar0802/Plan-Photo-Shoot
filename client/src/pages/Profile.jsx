@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logoutFunction } from '../utils/Logout'
 import React, { useState, useEffect } from 'react'
+import { apiBaseUrl } from '../utils/API';
 
 function checkName(user) {
     return user ? user : ""
@@ -22,7 +23,7 @@ function Profile() {
 
     async function fetchUserData(email) {
         try {
-            const response = await fetch("/api/user/focus", {
+            const response = await fetch(`${apiBaseUrl}/api/user/focus`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

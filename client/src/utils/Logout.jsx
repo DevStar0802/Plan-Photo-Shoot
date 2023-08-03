@@ -1,7 +1,10 @@
+import { apiBaseUrl } from '../utils/API';
+
+
 export async function logoutFunction() {
     try {
         // Send a logout request to the backend
-        await fetch('/api/user/logout', {
+        await fetch(`${apiBaseUrl}/api/user/logout`, {
             method: 'POST',
             credentials: 'include', // Include credentials to allow the server to clear the session
         });

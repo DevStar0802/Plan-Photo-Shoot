@@ -52,7 +52,7 @@ Ensure that you have `Node.js` and `MongoDB` installed locally on your machine,t
   6. At the top level directory, run `npm run develop` to start up your server and client via concurrently. 
 
 ## Live Link
-https://brent-bew-canon.github.io/Plan-Photo-Shoot/
+https://photoplanner.netlify.app/
 
 ## Screenshots                     
 

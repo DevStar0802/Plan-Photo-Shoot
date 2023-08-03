@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
+import { apiBaseUrl } from '../utils/API';
+
 
 //formik forms
 import { useFormik } from 'formik';
@@ -18,7 +20,7 @@ function Signup() {
         },
         onSubmit: async values => {
             try {
-                const response = await fetch("/api/user", {
+                const response = await fetch(`${apiBaseUrl}/api/user`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

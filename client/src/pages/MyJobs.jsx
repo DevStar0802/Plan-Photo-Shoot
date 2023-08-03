@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
+import { apiBaseUrl } from '../utils/API';
+
 
 function MyJobs() {
 
@@ -14,7 +16,7 @@ function MyJobs() {
 
     async function fetchUserData() {
         try {
-            const response = await fetch("/api/user/focus", {
+            const response = await fetch(`${apiBaseUrl}/api/user/focus`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

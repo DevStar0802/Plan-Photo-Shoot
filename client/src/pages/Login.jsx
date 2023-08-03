@@ -2,6 +2,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { useUserContext } from '../utils/UserContext';
+import { apiBaseUrl } from '../utils/API';
+
 
 
 function Login() {
@@ -23,7 +25,10 @@ function Login() {
         },
         onSubmit: async values => {
             try {
-                const response = await fetch("/api/user/login", {
+                console.log('path:', `${apiBaseUrl}/api/user/login`)
+                console.log('environment var: ', apiBaseUrl)
+                console.log('new url: ', import.meta.env.VITE_API_BASE_URL)
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

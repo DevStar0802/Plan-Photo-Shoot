@@ -1,17 +1,20 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { changeDate } from '../utils/Date'
 import { useFormik } from 'formik';
-import { apiBaseUrl } from '../utils/API';
-
+import fetchUserData from '../utils/fetchUser';
+import deleteJob from '../utils/deleteJob';
+import { set } from 'date-fns';
 
 function JobPage() {
     // State to track whether link is copied or not
     const [isLinkCopied, setIsLinkCopied] = useState(false);
     const [jobs, setJobs] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     //pull off the jobname from the location as state.jobber
     let { state } = useLocation();
     const urlJob = state.jobber;
+    const navigate = useNavigate();
 
     // When component mounts, call the fetch request for the job data
     useEffect(() => {
@@ -20,6 +23,7 @@ function JobPage() {
         window.scrollTo(0, 0);
     }, []);
 
+    //test amazon bucket fetch
     async function getBucket() {
         try {
             const response = await fetch(`${apiBaseUrl}/api/job/buckets`, {
@@ -52,6 +56,7 @@ function JobPage() {
             } else {
                 jobData.job.date = changeDate(jobData.job.date)
                 setJobs(jobData.job)
+                setIsLoading(false)
             }
         } catch (error) {
             console.log(error)
@@ -124,16 +129,30 @@ function JobPage() {
         });
     }
 
-    return (
+    //deletes the job from the database and then fetches the updated user data
+    async function removeJob(jobId) {
+        try {
+            const userEmail = JSON.parse(localStorage.getItem('user'))
+            const userResult = await fetchUserData(userEmail)
+            const result = await deleteJob(jobId, userResult)
+            if (result === "Success") {
+                navigate('/my-jobs')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (!isLoading ?
         <section className="projects-section bg-light" id="results">
             <div className="container px-4 px-lg-5" id="results-cont">
                 <div className="row">
                     <div className="col-sm-10 col-lg-6 mx-auto mt-4">
                         {/* Job Details */}
                         <div className=" text-lg-left">
-                            <h1 className="mb-4 text-center">{jobs.jobName || "jobs"}</h1>
+                            <h1 className="mb-4 text-center">{jobs.jobName || "loading.."}</h1>
                             <div className='text-center'>
-                                <h2 className='fs-2 text-primary' >${jobs.price || 'Price'}</h2>
+                                <h2 className='fs-2 text-primary' >${jobs.price || ''}</h2>
                             </div>
                             {/* <div className='text-center '>
                                 {isLinkCopied && (
@@ -156,7 +175,10 @@ function JobPage() {
                             </div>
                             <div className='text-center'>
                                 <a className='my-3 btn btn-warning' onClick={handleCopyLink} >{jobs.shareLink || 'Share Link'}</a>
-                            </div> */}
+                            </div>
+                            <div className='text-center'>
+                                <a className='my-3 btn btn-danger' onClick={() => removeJob(jobs._id)} >Delete Job</a>
+                            </div>
                             <div className="card mb-4" id="">
                                 <h5 className="card-header fw-bold">Date</h5>
                                 <div className="card-body">
@@ -213,9 +235,13 @@ function JobPage() {
                 </div>
             </div>
         </section>
+        :
+        <div className="d-flex justify-content-center mt-5">
+            <div className="spinner-border text-warning" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
     )
-
-
 }
 
 export default JobPage

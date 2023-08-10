@@ -1,20 +1,13 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logoutFunction } from '../utils/Logout'
 import React, { useState, useEffect } from 'react'
-import { apiBaseUrl } from '../utils/API';
-
-function checkName(user) {
-    return user ? user : ""
-}
-
-function checkUsername(user) {
-    return user ? user : ""
-}
+import { set } from 'date-fns';
 
 
 function Profile() {
     const [user, setUser] = useState('')
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const userEmail = JSON.parse(localStorage.getItem('user'));
@@ -35,9 +28,8 @@ function Profile() {
             const result = await response.json()
             if (result.message === "Success") {
                 setUser(result.user)
+                setIsLoading(false)
             }
-
-
         } catch (error) {
         }
     }
@@ -50,7 +42,8 @@ function Profile() {
         }
     };
 
-    return (
+    // return a loading symbol while the component is being mounted and then display the user data
+    return (!isLoading ?
         <section className="projects-section bg-light" id="results">
             <div className="container px-4 px-lg-5" id="results-cont">
                 <div className="row">
@@ -70,17 +63,23 @@ function Profile() {
                                 </div>
                             </div>
                             <div className="card mb-4" id="">
-                                <h5 className="card-header fw-bold">My Jobs</h5>
-                                <div className="card-body">
-                                    <Link className='text-decoration-none btn' to="/my-jobs">
-                                        <p id=""> See Jobs</p>
-                                    </Link>
-                                </div>
+                                <Link className='text-decoration-none btn btn-secondary fs-5' to="/my-jobs">
+                                    See Jobs
+                                </Link>
                             </div>
-                            <div className="text-center"></div>
-                            <button href="" className='btn btn-warning' onClick={handleLogout}>Logout</button>
+                            <div className="text-center">
+                                <button href="" className='btn btn-warning' onClick={handleLogout}>Logout</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        :
+        <section className="projects-section bg-light" id="results">
+            <div className="d-flex justify-content-center mt-5">
+                <div className="spinner-border text-warning" role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
         </section>

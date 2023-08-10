@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { apiBaseUrl } from '../utils/API';
 
 
 function CreateJob() {
@@ -9,7 +10,7 @@ function CreateJob() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    })
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -26,7 +27,7 @@ function CreateJob() {
         },
         onSubmit: async values => {
             try {
-                const response = await fetch("/api/job", {
+                const response = await fetch(`${apiBaseUrl}/api/job`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -38,7 +39,7 @@ function CreateJob() {
                 if (result.message === 'Success') {
                     //display success message then pull user data from local storage
                     const userEmail = JSON.parse(localStorage.getItem('user'))
-                    const urlString = `/api/user/${userEmail}`
+                    const urlString = `${apiBaseUrl}/api/user/${userEmail}`
                     //Run fetch request to add job to user profile
                     try {
                         const response = await fetch(urlString, {

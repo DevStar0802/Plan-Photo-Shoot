@@ -26,7 +26,7 @@ function JobPage() {
     //test amazon bucket fetch
     async function getBucket() {
         try {
-            const response = await fetch("/api/job/buckets", {
+            const response = await fetch(`${apiBaseUrl}/api/job/buckets`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -41,7 +41,7 @@ function JobPage() {
     // Fetch the data to populate the page with name, price, etc.
     async function fetchJobData(name) {
         try {
-            const response = await fetch("/api/job/focus", {
+            const response = await fetch(`${apiBaseUrl}/api/job/focus`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -77,7 +77,7 @@ function JobPage() {
                         formData.append('files', file);
                     });
 
-                    const response = await fetch('/api/job/upload', {
+                    const response = await fetch(`${apiBaseUrl}/api/job/upload`, {
                         method: 'POST',
                         body: formData,
                     });
@@ -154,8 +154,7 @@ function JobPage() {
                             <div className='text-center'>
                                 <h2 className='fs-2 text-primary' >${jobs.price || ''}</h2>
                             </div>
-                            <div className='text-center '>
-                                {/* <p className='text-warning fs-4'>{isLinkCopied ? 'Link Copied!' : ''}</p> */}
+                            {/* <div className='text-center '>
                                 {isLinkCopied && (
                                     <div
                                         style={{

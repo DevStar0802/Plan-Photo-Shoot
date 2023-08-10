@@ -4,6 +4,7 @@ import { useNavigate, } from 'react-router-dom';
 import { useUserContext } from '../utils/UserContext';
 //formik forms
 import { useFormik } from 'formik';
+import fog from '/assets/img/fog1.png'
 
 function MainPage() {
 
@@ -116,7 +117,7 @@ function MainPage() {
                         </div>
 
                         <div className="fog">
-                            <img src="public/assets/img/fog1.png" style={{ "--i": 8 }} />
+                            <img src={fog} style={{ "--i": 8 }} />
                             {/* <img src="public/assets/img/fog2.png" style={{ "--i": 8 }} />
                         <img src="public/assets/img/fog3.png" style={{ "--i": 8 }} /> */}
                         </div>

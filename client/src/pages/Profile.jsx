@@ -3,6 +3,7 @@ import { logoutFunction } from '../utils/Logout'
 import React, { useState, useEffect } from 'react'
 import { set } from 'date-fns';
 
+
 function Profile() {
     const [user, setUser] = useState('')
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Profile() {
 
     async function fetchUserData(email) {
         try {
-            const response = await fetch("/api/user/focus", {
+            const response = await fetch(`${apiBaseUrl}/api/user/focus`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

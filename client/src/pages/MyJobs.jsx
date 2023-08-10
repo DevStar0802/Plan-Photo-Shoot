@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import deleteJob from '../utils/deleteJob';
+import fetchUserData from '../utils/fetchUser';
 
 function MyJobs() {
     const [user, setUser] = useState({})
@@ -11,27 +12,16 @@ function MyJobs() {
 
     //initiate the fetchUserData function when the page loads
     useEffect(() => {
-        fetchUserData();
+        getUserData()
     }, []);
 
-
     //fetch the data for the logged in user to get the jobs they have saved
-    async function fetchUserData() {
+    async function getUserData() {
         try {
-            const response = await fetch("/api/user/focus", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: userEmail
-                }),
-            })
-            const result = await response.json()
-            setUser(result.user)
-            allJobs = result.user.jobs
+            const result = await fetchUserData(userEmail)
+            setUser(result)
+            allJobs = result.jobs
             setJobs(allJobs)
-            console.log(allJobs)
             setIsLoading(false)
         } catch (error) {
             console.log(error)
@@ -41,16 +31,15 @@ function MyJobs() {
     //deletes the job from the database and then fetches the updated user data
     async function removeJob(jobId) {
         try {
+            console.log(user)
             const result = await deleteJob(jobId, user)
             if (result === "Success") {
-                fetchUserData()
+                getUserData()
             }
         } catch (error) {
             console.log(error)
         }
     }
-
-
 
     //display the jobs saved to the user, if no jobs then display no jobs message
     function displayJobs() {

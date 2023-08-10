@@ -2,6 +2,7 @@
 //delete a job from the user's saved jobs
 async function deleteJob(jobId, user) {
     try {
+        console.log(user)
         const response = await fetch("/api/job/focus", {
             method: "DELETE",
             headers: {

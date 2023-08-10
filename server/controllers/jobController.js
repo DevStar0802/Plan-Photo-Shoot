@@ -34,19 +34,28 @@ module.exports = {
             return res.status(500).json('Error creating job:', err);
         }
     },
+
     // Delete a job
     async deleteJob(req, res) {
         try {
-            const job = await Job.findOneAndDelete({ jobName: req.body.jobName });
+            const user = await User.findOneAndUpdate(
+                { email: req.body.email },
+                { $pull: { jobs: req.body.jobId } },
+                { new: true }
+            );
 
+            const job = await Job.findOneAndDelete({ _id: req.body.jobId });
             if (!job) {
-                res.status(404).json({ message: 'No job with that Name' });
+                res.json({ message: 'No job with that Id' });
             }
-            res.json({ message: 'Job deleted!' });
+            res.json({ message: 'Success', user: user });
+            console.log(user);
+
         } catch (err) {
             res.status(500).json(err);
         }
     },
+
     // Update a job
     async updateJob(req, res) {
         try {

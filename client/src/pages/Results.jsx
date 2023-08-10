@@ -17,6 +17,7 @@ function Results() {
     const [map, setMap] = useState({});
     const [coordinates, setCoordinates] = useState({ lat: 33.42919, lon: -111.73205 });
     const [searchData, setSearchData] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
 
     //useEffect to reset packlist
     useEffect(() => {
@@ -24,15 +25,7 @@ function Results() {
         oldData.packingList = []
         localStorage.setItem('searchForm', JSON.stringify(oldData));
         window.scrollTo(0, 0);
-    }, []);
-
-    //useEffect to get coordinates from address
-    useEffect(() => {
         geocodeData()
-    }, []);
-
-    //useEffect to get extra details
-    useEffect(() => {
         packingList()
     }, []);
 
@@ -50,6 +43,7 @@ function Results() {
             new tt.Marker().setLngLat(coordinates).addTo(map)
         })
         setMap(map);
+
         return () => map.remove();
     }, [coordinates]);
 
@@ -60,7 +54,9 @@ function Results() {
         const savedSearchForm = JSON.parse(localStorage.getItem('searchForm'));
         let tomTomData = await getTomTomData(savedSearchForm)
         setCoordinates(tomTomData)
+        setIsLoading(false)
         return tomTomData
+
     }
 
     //calls createList to get detailed data and saves to storage/searchData
@@ -123,22 +119,44 @@ function Results() {
         window.scrollTo(0, 0);
     };
 
-    return (
+    return (isLoading ?
         <section className="projects-section bg-light" id="results" >
             <div className="container px-4 px-lg-5" id="results-cont">
-                <div className="row gx-0 mb-4 mb-lg-5 align-items-center">
+                <div className='row'>
+                    <div className="d-flex justify-content-center mt-5">
+                        <div className="spinner-border text-warning" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="row gx-0 mb-4 mb-lg-5 align-items-center justify-content-center">
                     {/* Div for map render */}
-                    <div className="">
+                    <div className="col-sm-10 col-lg-8 ">
                         <div className="mapContainer">
                             <div xs="8" className=''>
-                                <div ref={mapElement} className="mapDiv w-50 mx-auto mt-5" />
+                                <div ref={mapElement} className="mapDiv w-100 mx-auto mt-5 visually-hidden" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        :
+        <section className="projects-section bg-light" id="results" >
+            <div className="container px-4 px-lg-5" id="results-cont">
+                <div className="row gx-0 mb-4 mb-lg-5 align-items-center justify-content-center">
+                    {/* Div for map render */}
+                    <div className="col-sm-10 col-lg-8 ">
+                        <div className="mapContainer">
+                            <div xs="8" className=''>
+                                <div ref={mapElement} className="mapDiv w-100 mx-auto mt-5" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-12 col-lg-8 mx-auto mt-4">
-                        <div className=" text-lg-left">
+                        <div className=" text-center">
                             <h2 className="mb-4">Your Preparation </h2>
                         </div>
                     </div>
